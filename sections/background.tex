@@ -9,17 +9,22 @@ the set of states, $\mathcal{A}$ is the set of actions, $\mathcal{P}$ is the
 state transition probability, $\mathcal{R}$ is the reward function (???) and 
 $\gamma$ is the discount factor.
 
-The main goal of an agent is to estimate the action value function $Q$ that 
-computes how much expected return come from a state $s$ given an action $a$.
+The main goal of an agent is to interact with the environment maximizing the future rewards. In order to do this it estimates the action value function $Q$ that computes how much expected return come from a state $s$ given an action $a$: $Q(s, a) = \max_\pi E[R_t | s_t = s, a_t = a, \pi]$ where $\pi$ is a policy: a function that maps states to actions.
 
 
 Unluckily in a real context the MDP is unknown or its representation is too big
-(ex. game Go). To face this issue numerous methods were proposed. They are 
-called model free because they didn't need any priori knowledge and they learn 
-only from sampling.
+(ex. game Go). To face this issue numerous methods were proposed, they are 
+called \textit{model free} because they didn't need any prior knowledge and they learn only from sampling.
 
-One of this famous method is the Q-learning: a model free off policy [Watkins 
-1989]. Q-learning learns using two policy, the behavior policy $\mu$ that (???) 
-and the target policy $\pi$.
 
+\subsection{Q-learning}
+
+One method that tackles the previous issue is the \textbf{Q-learning} algorithm: a model free off policy method (???)[Watkins 1989]. 
+\textit{Off-policy} means that the Q-learning learning use two policy. The first one is the target policy $\pi$, that follows the \textit{greedy} strategy $a = \max_a Q(s, a; \theta)$, that is selecting always the action that will return the maximum reward.
+The second one is the \textit{behavior policy} $\mu$ that ensures an exploration of the states space, typically an \textit{$\epsilon$-greedy} strategy. \textit{$\epsilon$-greedy} is a greedy strategy only with probability $1 - \epsilon$ and selects a random action with probability $\epsilon$.
+
+It estimate the action-value function using the following update rule:
+\begin{equation}
+	Q(s,a) = Q(s, a) + \alpha (r + \gamma \max_{a'} Q(s', a') - Q(s, a))
+\end{equation}
 
