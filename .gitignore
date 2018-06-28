@@ -1,2 +1,7 @@
-paper.log
-paper.blg
+*.log
+*.blg
+*.pdf
+*.aux
+*.gz
+*.sty
+*.bst
