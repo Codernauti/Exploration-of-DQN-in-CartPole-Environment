@@ -1,5 +1,6 @@
 \begin{thebibliography}{}
 
+<<<<<<< HEAD
 \bibitem[\protect\citeauthoryear{Brockman \bgroup et al\mbox.\egroup
   }{2016}]{Gym}
 Brockman, G.; Cheung, V.; Pettersson, L.; Schneider, J.; Schulman, J.; Tang,
@@ -7,6 +8,8 @@ Brockman, G.; Cheung, V.; Pettersson, L.; Schneider, J.; Schulman, J.; Tang,
 \newblock 2016.
 \newblock Openai gym.
 
+=======
+>>>>>>> 3d66a47fa7179b5420b40a56ec626e56b9f48de2
 \bibitem[\protect\citeauthoryear{Hasselt}{2010}]{NIPS2010_3964}
 Hasselt, H.~V.
 \newblock 2010.

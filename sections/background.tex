@@ -32,5 +32,12 @@ It estimate the action-value function using the following update rule:
 \subsection{Double Q-learning}
 
 It is proved that Q-learning overestimates the action-value function 
-\cite{NIPS2010_3964}. This is caused by the approximation of the maximal estimator $\max_a Q(S_{t+1}, a)$ that is a bias estimator of $max_a E \{ Q(S_{t+1}, a) \}$. 
+~\cite{NIPS2010_3964}. This is caused by the approximation of the maximal estimator $\max_a Q(S_{t+1}, a)$ that is a bias estimator of $max_a E \{ Q(S_{t+1}, a) \}$, this bias is cumulative at each update. In order to remove this effect Van Hasselt proposed the \textbf{Double Q-learning} algorithm~\cite{NIPS2010_3964}. 
+The solution is to apply a double estimator to Q-learning, keeping two action-value function $Q^A$ and $Q^B$, at each step update only one of two function, in the update instead of use the $Q^A(S{t+1}, a^*) = \max_a Q(S_{t+1}, a)$ where $a^* = \max_a Q^A(S_{t+1}, a)$, it use $Q^B(S_{t+1}, a^*)$.
+Van Hasselt has shown in small experiments that the Double Q-learning is more accurate than Q-learning and sometimes underestimate.
 
+\subsection{DQN}
+
+In the recent advance with Deep Learning seems natural to try to apply these techniques in the Reinforcement Learning. Since the amazing result of DNN on raw sensory data DeepMind merges Q-learning with Neural Network and creates the Deep Q-learning algorithm.
+
+One important issue faced is that the agent has to learn from noisy data highly correlate. In order to break these correlation DeepMind successfully applied the \textit{experience replay} technique~\cite{Lin:1992:RLR:168871}. It consists in building a data-set samples called replay memory with a fixed size. At each step a sample $e_t = (s_t, a_t, r_t, s_{t+1})$ is store in the memory. Q-learning updates is done taken minibatches from this memory.
