@@ -5,5 +5,16 @@ Engelmore, R., and Morgan, A. eds. 1986. \textit{Blackboard Systems.} Reading, M
 
 \smallskip \noindent \textit{Journal Article}\\
 Robinson, A. L. 1980a. New Ways to Make Microcircuits Smaller. \textit{Science} 208: 1019--1026.
+
+@incollection{NIPS2010_3964,
+title = {Double Q-learning},
+author = {Hado V. Hasselt},
+booktitle = {Advances in Neural Information Processing Systems 23},
+editor = {J. D. Lafferty and C. K. I. Williams and J. Shawe-Taylor and R. S. Zemel and A. Culotta},
+pages = {2613--2621},
+year = {2010},
+publisher = {Curran Associates, Inc.},
+url = {http://papers.nips.cc/paper/3964-double-q-learning.pdf}
+}
 	
 \end{thebibliography}
