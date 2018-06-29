@@ -1,0 +1,27 @@
+\section{Experiments}
+
+Our testbed consist of CartPole challenge, using Gym environment.
+In this toy problem a pole is attached by an un-actuated joint to a cart, which moves along a frictionless track. The pendulum starts upright, and the goal is to prevent it from falling over by increasing and reducing the cart's velocity. It was invented for having pseudo-standard benchmark problem from the field of control theory and artificial neural networks for designing and testing controllers on complex and unstable nonlinear system.
+\\\\The maximum number of step for episode is 200, hence the maximum reward per episode is 200.
+\\\\The problem is defined "solving" if the agent get average reward of 195.0 over 100 consecutive trials. 
+\\\\However the goal of this experiment was not to solve the problem but to explore and evaluate the Double DQN algorithm as presented in Atari 2600 [] with a low-dimensional state.
+ 
+\subsubsection{State features}
+
+A state of the agent is described through a vector of four features: the  \textit{Cart Position}, its \textit{Cart Velocity}, the \textit{Pole Angle} and the \textit{Pole Velocity At Tip} (which can be interpreted on how fast the pole is falling) .
+
+\subsubsection{Action space}
+\subsubsection{Reward}
+\subsubsection{Episode termination}
+
+\subsection{Hyperparameters}
+
+\subsection{Neural Network Architecture}
+
+The first NN architecture adopted was a simple shallow NN, with a single fully-connected hidden layer.
+
+\subsection{Test sets}
+
+We decided on picking Q-learning algorithm as a starting point for the CartPole challenge.
+
+
