@@ -19,7 +19,7 @@ called \textit{model free} because they didn't need any prior knowledge and they
 
 \subsection{Q-learning}
 
-One method that tackles the previous issue is the \textbf{Q-learning} algorithm: a model free off policy method (???)[Watkins 1989]. 
+One method that tackles the previous issue is the \textbf{Q-learning} algorithm: a model free off policy method \cite{Watkins1992}. 
 \textit{Off-policy} means that the Q-learning learning use two policy. The first one is the target policy $\pi$, that follows the \textit{greedy} strategy $a = \max_a Q(s, a; \theta)$, that is selecting always the action that will return the maximum reward.
 The second one is the \textit{behavior policy} $\mu$ that ensures an exploration of the states space, typically an \textit{$\epsilon$-greedy} strategy. \textit{$\epsilon$-greedy} is a greedy strategy only with probability $1 - \epsilon$ and selects a random action with probability $\epsilon$.
 
@@ -31,4 +31,6 @@ It estimate the action-value function using the following update rule:
 
 \subsection{Double Q-learning}
 
-It is proved that Q-learning overestimates the action-value function []. This is caused by the approximation of the maximal estimator $\max_a Q(S_{t+1}, a)$ that is a bias estimator of $max_a E \{ Q(S_{t+1}, a) \}$
+It is proved that Q-learning overestimates the action-value function 
+\cite{NIPS2010_3964}. This is caused by the approximation of the maximal estimator $\max_a Q(S_{t+1}, a)$ that is a bias estimator of $max_a E \{ Q(S_{t+1}, a) \}$. 
+

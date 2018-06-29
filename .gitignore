@@ -4,3 +4,5 @@
 *.aux
 *.gz
 paper.bbl
+paper.bcf
+paper.run.xml
