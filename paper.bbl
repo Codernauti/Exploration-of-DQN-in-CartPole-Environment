@@ -1,3 +1,18 @@
 \begin{thebibliography}{}
 
+\bibitem[\protect\citeauthoryear{Hasselt}{2010}]{NIPS2010_3964}
+Hasselt, H.~V.
+\newblock 2010.
+\newblock Double q-learning.
+\newblock In Lafferty, J.~D.; Williams, C. K.~I.; Shawe-Taylor, J.; Zemel,
+  R.~S.; and Culotta, A., eds., {\em Advances in Neural Information Processing
+  Systems 23}. Curran Associates, Inc.
+\newblock  2613--2621.
+
+\bibitem[\protect\citeauthoryear{Watkins and Dayan}{1992}]{Watkins1992}
+Watkins, C. J. C.~H., and Dayan, P.
+\newblock 1992.
+\newblock Q-learning.
+\newblock {\em Machine Learning} 8(3):279--292.
+
 \end{thebibliography}
