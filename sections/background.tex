@@ -28,3 +28,7 @@ It estimate the action-value function using the following update rule:
 	Q(s,a) = Q(s, a) + \alpha (r + \gamma \max_{a'} Q(s', a') - Q(s, a))
 \end{equation}
 
+
+\subsection{Double Q-learning}
+
+It is proved that Q-learning overestimates the action-value function []. This is caused by the approximation of the maximal estimator $\max_a Q(S_{t+1}, a)$ that is a bias estimator of $max_a E \{ Q(S_{t+1}, a) \}$

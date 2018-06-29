@@ -3,4 +3,4 @@
 *.pdf
 *.aux
 *.gz
-*.bst
+paper.bbl
