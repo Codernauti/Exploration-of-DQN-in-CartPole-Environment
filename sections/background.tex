@@ -9,26 +9,31 @@ the set of states, $\mathcal{A}$ is the set of actions, $\mathcal{P}$ is the
 state transition probability, $\mathcal{R}$ is the reward function (???) and 
 $\gamma$ is the discount factor.
 
-The main goal of an agent is to interact with the environment maximizing the future rewards. In order to do this it estimates the action value function $Q$ that computes how much expected return come from a state $s$ given an action $a$: $Q(s, a) = \max_\pi E[R_t | s_t = s, a_t = a, \pi]$ where $\pi$ is a policy: a function that maps states to actions.
+The main goal of an agent is to interact with the environment maximizing the future rewards. In order to do this it estimates the action value function $Q$ that computes how much expected return come from a state $s$ given an action $a$: $Q(s, a) = \max_\pi E[R_t | s_t = s, a_t = a, \pi]$ where $\pi$ is a policy, that is a function that maps states to actions.
 
 
 Unluckily in a real context the MDP is unknown or its representation is too big
-(ex. game Go). To face this issue numerous methods were proposed, they are 
-called \textit{model free} because they didn't need any prior knowledge and they learn only from sampling.
+(ex. game Go). To face this issue numerous methods were proposed. They are 
+classified as \textit{model-free} methods because they didn't need any prior knowledge and they learn only from sampling.
 
 
 \subsection{Q-learning}
 
-One method that tackles the previous issue is the \textbf{Q-learning} algorithm: a model free off policy method \cite{Watkins1992}. 
-\textit{Off-policy} means that the Q-learning learning use two policy. The first one is the target policy $\pi$, that follows the \textit{greedy} strategy $a = \max_a Q(s, a; \theta)$, that is selecting always the action that will return the maximum reward.
+One method that tackles the previous issue is the \textbf{Q-learning} algorithm: a \textit{model-free} \textit{off-policy} method \cite{Watkins1992}. 
+\textit{Off-policy} means that the Q-learning learns using two policy. The first one is the target policy $\pi$, that follows the \textit{greedy} strategy $a = \max_a Q(s, a; \theta)$, that is selecting always the action that will return the maximum reward.
 The second one is the \textit{behavior policy} $\mu$ that ensures an exploration of the states space, typically an \textit{$\epsilon$-greedy} strategy. \textit{$\epsilon$-greedy} is a greedy strategy only with probability $1 - \epsilon$ and selects a random action with probability $\epsilon$.
 
-It estimate the action-value function using the following update rule:
+The Q-learning first initialize arbitrarily the $Q(s,a)$ except for the terminal state where $Q$ is initialize to 0.
+The agent from the initial state $S_0$ starts the iteration identified by a step $t$. Inside this loop the agent choose an action $A_t$ from $S_t$ (current state) using the \textit{behavior policy}. Then it takes the action $A_t$ and observe from the environment the immediate reward $R_{t+1}$ and the resulting state $S_{t+1}$ with which it estimates the action-value function through the following update rule:
 \begin{equation}
-	Q(s,a) = Q(s, a) + \alpha (r + \gamma \max_{a'} Q(s', a') - Q(s, a))
+	Q(S_t, A_t) = Q(S_t, A_t) + \alpha (Y^Q_t - Q(S_t, A_t))
+\end{equation}
+Where $\alpha$ is a scalar step size and the target $Y^Q_t$ is defined as
+\begin{equation}
+	Y^Q_t \equiv R_{t+1} + \gamma \max_{a} Q(S_{t+1}, a)
 \end{equation}
 
-(How Q-learning works???)
+Finally $S'$ is assigned to $S$. The iteration stops when $S$ is terminal.
 
 \subsection{Q-learning and Deep Q Networks}
 
@@ -43,10 +48,10 @@ DeepMind with this work has shown as a DQN algorithm
 
 \subsection{Double Q-learning}
 
-It is proved that Q-learning overestimates the action-value function 
-~\cite{NIPS2010_3964}. This is caused by the approximation of the maximal estimator $\max_a Q(S_{t+1}, a)$ that is a bias estimator of $max_a E \{ Q(S_{t+1}, a) \}$, this bias is cumulative at each update. In order to remove this effect Van Hasselt proposed the \textbf{Double Q-learning} algorithm~\cite{NIPS2010_3964}. 
-The solution is to apply a double estimator to Q-learning, keeping two action-value function $Q^A$ and $Q^B$, at each step update only one of two function, in the update instead of use the $Q^A(S{t+1}, a^*) = \max_a Q(S_{t+1}, a)$ where $a^* = \max_a Q^A(S_{t+1}, a)$, it use $Q^B(S_{t+1}, a^*)$.
-Van Hasselt has shown in small experiments that the Double Q-learning is more accurate than Q-learning and sometimes underestimate.
+It is proved that Q-learning overestimates the action-value function~\cite{NIPS2010_3964}. This is caused by the approximation of the maximal estimator $\max_a Q(S_{t+1}, a)$ that is a bias estimator of $max_a E \{ Q(S_{t+1}, a) \}$, this bias is cumulative at each update. In order to remove this effect the \textbf{Double Q-learning} algorithm has been proposed~\cite{NIPS2010_3964}.
+
+The main idea of Double Q-learning is to use a double estimator: keeping two action-value function $Q^A$ and $Q^B$. At each step only one of two function is updated and in the update instead of using the $Q^A(S{t+1}, a^*) = \max_a Q(S_{t+1}, a)$ where $a^* = \max_a Q^A(S_{t+1}, a)$ it is used $Q^B(S_{t+1}, a^*)$.
+Van Hasselt (2010) has proved mathematically and with small environment that the Double Q-learning is more accurate than Q-learning and sometimes underestimate.
 
 \subsection{Double Q-learning and Deep Q Networks}
 
