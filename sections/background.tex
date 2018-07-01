@@ -36,6 +36,7 @@ Where $\alpha$ is a scalar step size and the target $Y^Q_t$ is defined as
 Finally $S'$ is assigned to $S$. The iteration goes on until $S$ is a terminal state.
 
 \subsection{Deep Q Network algorithm}
+\label{subsec:DQN}
 
 %(What do the authors want to do?)
 In the~\cite{DBLP:journals/corr/MnihKSGAWR13} work a new successful result using Q-learning was obtained implementing the \textbf{Deep Q Network} (\textbf{DQN}) \textbf{algorithm}. This DQN trained with Q-learning has learnt successfully to play 7 Atari 2600 games only from high-dimensional sensory input.
@@ -56,12 +57,23 @@ In the seven games used as testing environment the DQN algorithm opportunely tun
 
 
 \subsection{Double Q-learning}
+\label{subsec:DoubleQlearning}
 
 It is proved that Q-learning overestimates the action-value function~\cite{NIPS2010_3964}. This is caused by the approximation of the maximal estimator $\max_a Q(S_{t+1}, a)$ that is a bias estimator of $max_a E \{ Q(S_{t+1}, a) \}$, this bias is cumulative at each update. In order to remove this effect the \textbf{Double Q-learning} algorithm has been proposed~\cite{NIPS2010_3964}.
 
 The main idea of Double Q-learning is to use a double estimator: keeping two action-value function $Q^A$ and $Q^B$. At each step only one of two function is updated and in the update instead of using the $Q^A(S{t+1}, a^*) = \max_a Q(S_{t+1}, a)$ where $a^* = \max_a Q^A(S_{t+1}, a)$ it is used $Q^B(S_{t+1}, a^*)$.
 Van Hasselt (2010) has proved mathematically and in small environments that the Double Q-learning is more accurate than Q-learning and sometimes underestimate.
 
-\subsection{Double Q-learning and Deep Q Networks}
+\subsection{Double Deep Q Network}
 
-In the article \cite{Mnih2015} showed that using also 
+%(What do the authors want to do?)
+%(What is the result?)
+In the article \textit{Human-level control through deep reinforcement learning}~\cite{Mnih2015} and successively in \textit{Deep Reinforcement Learning with Double Q-learning}~\cite{Hasselt:2016:DRL:3016100.3016191} the DQN algorithm is enchanted with the using of Double Q-learning algorithm described above. The final algorithm, called \textbf{Double Deep Q Network} (\textbf{DDQN}) \textbf{algorithm}, showed an important result for the Deep Reinforcement Learning field. The agent trains itself and learns to play better than human player in (???) of 57 Atari 2600 games.
+
+%(How does the algorithm work?)
+
+%(What were the general issues?)
+%(How do they solve them?)
+The issue resolved with Double Q-learning was the high overestimation caused by Q-learning. \citeauthor{Hasselt:2016:DRL:3016100.3016191}~\shortcite{Hasselt:2016:DRL:3016100.3016191} shown that Double Q-learning improve the estimation involving an improving of the general performance of the DQN algorithm.
+
+
