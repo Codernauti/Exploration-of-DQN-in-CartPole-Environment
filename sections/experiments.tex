@@ -9,12 +9,35 @@ In this toy problem a pole is attached by an un-actuated joint to a cart, which 
 \subsubsection{State features}
 
 A state of the agent is described through a vector of four features: the  \textit{Cart Position}, its \textit{Cart Velocity}, the \textit{Pole Angle} and the \textit{Pole Velocity At Tip} (which can be interpreted on how fast the pole is falling) .
+Using these observations, the agent needs to decide on one of two possible actions: move the cart left or right.
 
 \subsubsection{Action space}
+One of the main challenges was to convert the continuous, 4-dimensional input space to a discrete space. 
+\\For the Q-learning algorithm, less states we have, smaller the Q-table will be and the less steps the agent will need to properly learn its values. 
+
 \subsubsection{Reward}
-\subsubsection{Episode termination}
+
+Normally in games, the reward directly relates to the score of the game.
+
+
+\subsubsection{Loss function}
+
+The loss is a value that indicates how far our prediction is from the actual target. For example, the prediction of the model could indicate that it sees more value in pushing the right button when in fact it can gain more reward by pushing the left button. We want to decrease this gap between the prediction and the target (loss).
+[rimestare]
+\\
+\[formula\]
+\\We have chose the Mean Square Error (MSE).
+[altre?]
 
 \subsection{Hyperparameters}
+
+To make the agent perform well in long-term, we need to take into account not only the immediate rewards but also the future rewards we are going to get. In order to do this, we are going to have a \textbf{discount rate} or "gamma". This way the agent will learn to maximize the discounted future reward based on the given state.
+\\\\\textbf{episodes}: the number of games we want the agent to play.
+\\\textbf{gamma}: discount rate, to calculate the future discounted reward.
+\\\textbf{max\_epsilon}:
+\\\textbf{min\_epsilon}:
+\\\textbf{lambda}:
+
 
 \subsection{Neural Network Architecture}
 
