@@ -41,14 +41,21 @@ Finally $S'$ is assigned to $S$. The iteration goes on until $S$ is a terminal s
 %(What do the authors want to do?)
 In the~\cite{DBLP:journals/corr/MnihKSGAWR13} work a new successful result using Q-learning was obtained implementing the \textbf{Deep Q Network} (\textbf{DQN}) \textbf{algorithm}. This DQN trained with Q-learning has learnt successfully to play 7 Atari 2600 games only from high-dimensional sensory input.
 
-DQN is a multi-layered Convolution Neural Network $Q(s, \cdotp; \theta)$, where $\theta$ are the parameters, that approximate the action-value function $Q$. It takes a 84x84 gray-scale image as input representing the state $s$, and it outputs one predicted $Q$-value for each valid action. The target used is:
+DQN is a multi-layered Convolution Neural Network $Q(s, \cdotp; \theta)$ (TODO: CITARE L'ARCHITETTURA???), where $\theta$ are the parameters, that approximates the action-value function $Q$. It takes a 84x84 gray-scale image as input representing the state $s$, and it outputs one predicted $Q$-value for each valid action.  
+
+%(What were the general issues?)
+%(How do they solve them?)
+One important issue faced is that the agent has to learn from noisy data highly correlate. In order to break these correlations they successfully applied the \textit{experience replay} technique~\cite{Lin:1992:RLR:168871}. It consists in building a data-set of samples \textit{replay memory} ($D$). At each step a sample $e_t = (s_t, a_t, r_{t+1}, s_{t+1})$ is store in the memory overwriting the most old sample. At each step, the algorithm applies the Q-learning update on samples of experience $(S_t, A_t, R_{t+1}, S_{t+1}) \sim U(D)$, taken uniformly at random from this memory. The Q-learning update at step $t$ uses the following loss:
+\begin{equation}
+	L_t(\theta_t) = E_{(S_t, A_t, R_{t+1}, S_{t+1}) \sim U(D)} % 
+		\Big[ Y^{DQN}_t - Q(S_t, A_t;\theta_t) \Big]
+\end{equation}
+With the target define as:
 \begin{equation}
 Y^{DQN}_t \equiv R_{t+1} + \gamma \max_{a} Q(S_{t+1}, a; \theta_t)
 \end{equation}
 
-%(What were the general issues?)
-%(How do they solve them?)
-One important issue faced is that the agent has to learn from noisy data highly correlate. In order to break these correlations they successfully applied the \textit{experience replay} technique~\cite{Lin:1992:RLR:168871}. It consists in building a data-set of samples \textit{replay memory}. At each step a sample $e_t = (s_t, a_t, r_t, s_{t+1})$ is store in the memory overwriting the most old sample. At each step of the Q-learning algorithm the DQN is updated sampling uniformly from this memory. Using \textit{experience replay} implies a greater data efficiency since each sample is potentially used in many weight updates and it avoids oscillations or divergence in the parameters of the network.
+Using \textit{experience replay} implies a greater data efficiency since each sample is potentially used in many weight updates and it avoids oscillations or divergence in the parameters of the network.
 
 %(What is the result?)
 In the seven games used as testing environment the DQN algorithm opportunely tuned has given state-of-the-art results in six of them.
@@ -64,13 +71,27 @@ It is proved that Q-learning overestimates the action-value function~\cite{NIPS2
 The main idea of Double Q-learning is to use a double estimator: keeping two action-value function $Q^A$ and $Q^B$. At each step only one of two function is updated and in the update instead of using the $Q^A(S{t+1}, a^*) = \max_a Q(S_{t+1}, a)$ where $a^* = \max_a Q^A(S_{t+1}, a)$ it is used $Q^B(S_{t+1}, a^*)$.
 Van Hasselt (2010) has proved mathematically and in small environments that the Double Q-learning is more accurate than Q-learning and sometimes underestimate.
 
-\subsection{Double Deep Q Network}
+\subsection{Double Deep Q Network Algorithm}
 
 %(What do the authors want to do?)
 %(What is the result?)
-In the article \textit{Human-level control through deep reinforcement learning}~\cite{Mnih2015} and successively in \textit{Deep Reinforcement Learning with Double Q-learning}~\cite{Hasselt:2016:DRL:3016100.3016191} the DQN algorithm is enchanted with the using of Double Q-learning algorithm described above. The final algorithm, called \textbf{Double Deep Q Network} (\textbf{DDQN}) \textbf{algorithm}, showed an important result for the Deep Reinforcement Learning field. The agent trains itself and learns to play better than human player in (???) of 57 Atari 2600 games.
+In the article \textit{Human-level control through deep reinforcement learning}~\cite{Mnih2015} the DQN algorithm is improved using the Double Q-learning idea. In addition to \textit{experience replay} they used an iterative update that updates the action-values ($Q$) with a different network. 
 
 %(How does the algorithm work?)
+Remembering the two policy of Q-learning, the enhanced DQN algorithm applies an \textit{$\epsilon$-greedy} policy with the network $Q(s, \cdotp; \theta)$ (\textit{online network}) and it applies the \textit{greedy} policy with the \emph{different} network $Q(s, \cdotp; \theta')$ (\textit{target network}). The parameters $\theta'$ are updated with a periodically copy of the $\theta$ parameters from the \textit{online network}. The target is defined as:
+\begin{equation}
+	Y^{DoubleDQN}_t \equiv R_{t+1} + \gamma \max_{a} Q(S_{t+1}, a; \theta_t')
+\end{equation}
+
+\citeauthor{Mnih2015} \shortcite{Mnih2015} demonstrated that the union of experience replay, separate target Q-network and deep convolutional network architecture are essential for outperforming the best existing reinforcement learning methods on 43 of 57 Atari 2600 games. Furthermore the agent achieves more than 75\% of the human score on 29 games.
+
+
+(TODO)
+Successively in \textit{Deep Reinforcement Learning with Double Q-learning}~\cite{Hasselt:2016:DRL:3016100.3016191} was shown that 
+
+the enchanted DQN algorithm, called \textbf{Double Deep Q Network} (\textbf{DDQN}),
+
+showed an important result for the Deep Reinforcement Learning field. The agent trains itself and learns to play better than human player in (???) of 57 Atari 2600 games.
 
 %(What were the general issues?)
 %(How do they solve them?)
