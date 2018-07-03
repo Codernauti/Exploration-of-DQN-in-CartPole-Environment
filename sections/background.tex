@@ -1,7 +1,7 @@
 \section{Background}
 
+(TODO)
 %The agent each step t interact with the environment and receive a reward. 
-
 The interaction between the agent and the environment is described  with the
 Markov Decision Process (MDP) formalism. A MDP is a tupla $\langle \mathcal{S}, 
 \mathcal{A}, \mathcal{P}, \mathcal{R}, \gamma \rangle$ where $\mathcal{S}$ is
@@ -19,8 +19,9 @@ classified as \textit{model-free} methods because they didn't need any prior kno
 
 \subsection{Q-learning}
 
-One method that tackles the previous issue is the \textbf{Q-learning} algorithm: a \textit{model-free} \textit{off-policy} method \cite{Watkins1992}. 
-\textit{Off-policy} means that the Q-learning learns using two policy. The first one is the target policy $\pi$, that follows the \textit{greedy} strategy $a = \max_a Q(s, a; \theta)$, that is selecting always the action that will return the maximum reward.
+One method that tackles the previous issue is the \textbf{Q-learning} algorithm: a a form of \textit{temporal difference learning} \cite{Sutton:1998:IRL:551283}
+
+Q-learning is defined as a \textit{model-free} \textit{off-policy} method \cite{Watkins1992}. \textit{Off-policy} means that the Q-learning learns using two policy. The first one is the target policy $\pi$, that follows the \textit{greedy} strategy $a = \max_a Q(s, a; \theta)$, that is selecting always the action that will return the maximum reward.
 The second one is the \textit{behavior policy} $\mu$ that ensures an exploration of the states space, typically an \textit{$\epsilon$-greedy} strategy. \textit{$\epsilon$-greedy} is a greedy strategy only with probability $1 - \epsilon$ and selects a random action with probability $\epsilon$.
 
 The Q-learning first initialize arbitrarily the $Q(s,a)$ except for the terminal state where $Q$ is initialize to 0.
@@ -39,62 +40,66 @@ Finally $S'$ is assigned to $S$. The iteration goes on until $S$ is a terminal s
 \label{subsec:DQN}
 
 %(What do the authors want to do?)
-In the~\cite{DBLP:journals/corr/MnihKSGAWR13} work a new successful result using Q-learning was obtained implementing the \textbf{Deep Q Network} (\textbf{DQN}) \textbf{algorithm}. This DQN trained with Q-learning has learnt successfully to play 7 Atari 2600 games only from high-dimensional sensory input.
+In the~\cite{DBLP:journals/corr/MnihKSGAWR13} work a new successful result using Q-learning was obtained implementing the first version of the \textbf{Deep Q Network} (\textbf{DQN}) \textbf{algorithm}. This DQN trained with Q-learning has learnt successfully to play 7 Atari 2600 games only from high-dimensional sensory input. (TODO: CITARE L?ENVIRONMENT)
 
-DQN is a multi-layered Convolution Neural Network $Q(s, \cdotp; \theta)$ (TODO: CITARE L'ARCHITETTURA???), where $\theta$ are the parameters, that approximates the action-value function $Q$. It takes a 84x84 gray-scale image as input representing the state $s$, and it outputs one predicted $Q$-value for each valid action.  
+DQN is a multi-layered Convolution Neural Network $Q(s, \cdotp; \theta)$ (TODO: CITARE L'ARCHITETTURA???), where $\theta$ are the parameters, that approximates the action-value function $Q$. It takes a 84x84x4 of the last four gray-scale frames as input representing the state $s$, and it outputs one predicted $Q$-value for each valid action.  
 
 %(What were the general issues?)
 %(How do they solve them?)
-One important issue faced is that the agent has to learn from noisy data highly correlate. In order to break these correlations they successfully applied the \textit{experience replay} technique~\cite{Lin:1992:RLR:168871}. It consists in building a data-set of samples \textit{replay memory} ($D$). At each step a sample $e_t = (s_t, a_t, r_{t+1}, s_{t+1})$ is store in the memory overwriting the most old sample. At each step, the algorithm applies the Q-learning update on samples of experience $(S_t, A_t, R_{t+1}, S_{t+1}) \sim U(D)$, taken uniformly at random from this memory. The Q-learning update at step $t$ uses the following loss:
+One important issue faced is that the agent has to learn from noisy data highly correlate. In order to break these correlations they successfully applied the \textit{experience replay} technique~\cite{Lin:1992:RLR:168871}. It consists in building a data-set of samples, the \textit{replay memory} ($D$).
+
+At each step the algorithm stores a new sample $e_t = (s_t, a_t, r_{t+1}, s_{t+1})$ overwriting the most old one, then it applies the Q-learning update on samples of experience $(S_t, A_t, R_{t+1}, S_{t+1}) \sim U(D)$ taken uniformly at random from this memory. The Q-learning update at step $t$ uses the following loss:
 \begin{equation}
-	L_t(\theta_t) = E_{(S_t, A_t, R_{t+1}, S_{t+1}) \sim U(D)} % 
+	L_t(\theta_t) = E_{e_t \sim U(D)} % 
 		\Big[ Y^{DQN}_t - Q(S_t, A_t;\theta_t) \Big]
 \end{equation}
 With the target define as:
 \begin{equation}
-Y^{DQN}_t \equiv R_{t+1} + \gamma \max_{a} Q(S_{t+1}, a; \theta_t)
+Y^{DQN_1}_t \equiv R_{t+1} + \gamma \max_{a} Q(S_{t+1}, a; \theta_t)
 \end{equation}
 
 Using \textit{experience replay} implies a greater data efficiency since each sample is potentially used in many weight updates and it avoids oscillations or divergence in the parameters of the network.
 
+%(CUT)
 %(What is the result?)
-In the seven games used as testing environment the DQN algorithm opportunely tuned has given state-of-the-art results in six of them.
+%In the seven games used as testing environment the DQN algorithm opportunely tuned has given state-of-the-art results in six of them.
+%(CUT)
 
+%(What do the authors want to do?)
+In the article \textit{Human-level control through deep reinforcement learning}~\cite{Mnih2015} the \textbf{DQN algorithm} is improved using a \textit{target network} in addition to \textit{experience replay}.
+
+%(How does the algorithm work?)
+The second version of DQN algorithm applies an \textit{$\epsilon$-greedy} policy with the network $Q(s, \cdotp; \theta)$ (\textit{online network}) and it applies the \textit{greedy} policy with the \emph{different} network $Q(s, \cdotp; \theta')$ (\textit{target network}). The parameters $\theta'$ are updated with a periodically copy of the $\theta$ parameters from the \textit{online network}. The target is now defined as:
+\begin{equation}
+Y^{DQN_2}_t \equiv R_{t+1} + \gamma \max_{a} Q(S_{t+1}, a; \theta_t')
+\end{equation}
+
+%(What is the result?)
+\citeauthor{Mnih2015} \shortcite{Mnih2015} demonstrated that the union of \textit{experience replay}, separate \textit{target Q-network} and deep convolutional network architecture are essential for outperforming the best existing reinforcement learning methods on 43 of 57 Atari 2600 games. Furthermore the agent achieves more than 75\% of the human score on 29 games.
 
 
 
 \subsection{Double Q-learning}
 \label{subsec:DoubleQlearning}
 
-It is proved that Q-learning overestimates the action-value function~\cite{NIPS2010_3964}. This is caused by the approximation of the maximal estimator $\max_a Q(S_{t+1}, a)$ that is a bias estimator of $max_a E \{ Q(S_{t+1}, a) \}$, this bias is cumulative at each update. In order to remove this effect the \textbf{Double Q-learning} algorithm has been proposed~\cite{NIPS2010_3964}.
+It is known that Q-learning overestimates the action-value function~\cite{NIPS2010_3964}. This is caused by the approximation of the maximal estimator $\max_a Q(S_{t+1}, a)$ that is a bias estimator of $max_a E \{ Q(S_{t+1}, a) \}$, this bias is cumulative at each update. In order to remove this effect the \textbf{Double Q-learning} algorithm has been proposed~\cite{NIPS2010_3964}.
 
 The main idea of Double Q-learning is to use a double estimator: keeping two action-value function $Q^A$ and $Q^B$. At each step only one of two function is updated and in the update instead of using the $Q^A(S{t+1}, a^*) = \max_a Q(S_{t+1}, a)$ where $a^* = \max_a Q^A(S_{t+1}, a)$ it is used $Q^B(S_{t+1}, a^*)$.
 Van Hasselt (2010) has proved mathematically and in small environments that the Double Q-learning is more accurate than Q-learning and sometimes underestimate.
 
 \subsection{Double Deep Q Network Algorithm}
 
-%(What do the authors want to do?)
-%(What is the result?)
-In the article \textit{Human-level control through deep reinforcement learning}~\cite{Mnih2015} the DQN algorithm is improved using the Double Q-learning idea. In addition to \textit{experience replay} they used an iterative update that updates the action-values ($Q$) with a different network. 
+% What did the authors demontrate?
+%(What were the general issues?)
+\textit{Deep Reinforcement Learning with Double Q-learning}~\cite{Hasselt:2016:DRL:3016100.3016191} showed that DQN algorithm suffers from overestimations impacting negatively on the quality of the policy learned. They demonstrate that estimation errors of any kind can induce an upward bias driving the estimate up and away from the true optimal value.
 
-%(How does the algorithm work?)
-Remembering the two policy of Q-learning, the enhanced DQN algorithm applies an \textit{$\epsilon$-greedy} policy with the network $Q(s, \cdotp; \theta)$ (\textit{online network}) and it applies the \textit{greedy} policy with the \emph{different} network $Q(s, \cdotp; \theta')$ (\textit{target network}). The parameters $\theta'$ are updated with a periodically copy of the $\theta$ parameters from the \textit{online network}. The target is defined as:
+% How did they enhanced the algorithm?
+In order to reduce this overestimation \citeauthor{Hasselt:2016:DRL:3016100.3016191} \shortcite{Hasselt:2016:DRL:3016100.3016191} proposed the \textbf{Double Deep Q Network} (\textbf{DDQN}), a DQN adaptation that implements the idea of the Double Q-learning. The only change from the previous DQN~\cite{Mnih2015} was the target $Y_t^{DQN_2}$ replaced with:
 \begin{equation}
-	Y^{DoubleDQN}_t \equiv R_{t+1} + \gamma \max_{a} Q(S_{t+1}, a; \theta_t')
+	Y^{DDQN}_t \equiv R_{t+1} + \gamma Q(S_{t+1}, 
+		\arg\max_{a} Q(S_{t+1}, a; \theta_t); \theta_t^-)
 \end{equation}
 
-\citeauthor{Mnih2015} \shortcite{Mnih2015} demonstrated that the union of experience replay, separate target Q-network and deep convolutional network architecture are essential for outperforming the best existing reinforcement learning methods on 43 of 57 Atari 2600 games. Furthermore the agent achieves more than 75\% of the human score on 29 games.
-
-
-(TODO)
-Successively in \textit{Deep Reinforcement Learning with Double Q-learning}~\cite{Hasselt:2016:DRL:3016100.3016191} was shown that 
-
-the enchanted DQN algorithm, called \textbf{Double Deep Q Network} (\textbf{DDQN}),
-
-showed an important result for the Deep Reinforcement Learning field. The agent trains itself and learns to play better than human player in (???) of 57 Atari 2600 games.
-
-%(What were the general issues?)
-%(How do they solve them?)
-The issue resolved with Double Q-learning was the high overestimation caused by Q-learning. \citeauthor{Hasselt:2016:DRL:3016100.3016191}~\shortcite{Hasselt:2016:DRL:3016100.3016191} shown that Double Q-learning improve the estimation involving an improving of the general performance of the DQN algorithm.
+Using the exact same hyper-parameters of DQN algorithm the Double DQN obtained clearly better results showing that reducing overestimations can significantly benefit the stability of learning.
 
 
