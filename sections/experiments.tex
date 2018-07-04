@@ -4,24 +4,28 @@
 Our testbed consist of CartPole challenge, using Gym environment \cite{Gym}.
 In this toy problem a pole is attached by an un-actuated joint to a cart, which moves along a frictionless track. The pendulum starts upright, and the goal is to prevent it from falling over by increasing and reducing the cart's velocity. It was invented for having pseudo-standard benchmark problem from the field of control theory and artificial neural networks for designing and testing controllers on complex and unstable non-linear system.
 
-The maximum number of step for episode is 200, hence the maximum reward per episode is 200.
-
 The problem is defined \textit{``solving''} if the agent get average reward of 195.0 over 100 consecutive trials. However our goal of this experiment is the exploration and evaluation in a low-dimensional environment of the DQN algorithms previously described.
  
 \subsubsection{State features}
-
-A state of the agent is described through a vector of four features: the  \textit{Cart Position}, its \textit{Cart Velocity}, the \textit{Pole Angle} and the \textit{Pole Velocity At Tip} (which can be interpreted on how fast the pole is falling) .
-Using these observations, the agent needs to decide on one of two possible actions: move the cart left or right.
+A state of the agent is described through a vector of 4 features: the  \textit{Cart Position}, \textit{Cart Velocity}, \textit{Pole Angle} and \textit{Pole Velocity At Tip} (which can be interpreted on how fast the pole is falling) .
 
 \subsubsection{Action space}
-One of the main challenges was to convert the continuous, 4-dimensional input space to a discrete space. 
+Using the previous observations, the agent needs to decide on one of two possible actions: apply a left or right force to the cart. Force is described as discrete number: 0 for the left, 1 for the right.
+
+
+%One of the main challenges was to convert the continuous, 4-dimensional input space to a discrete space. 
 
 %For the Q-learning algorithm, less states we have, smaller the Q-table will be and the less steps the agent will need to properly learn its values. 
 
+\subsubsection{Episode termination}
+An episode terminates when the pole angle is more than $\pm12$ or cart position is more than $\pm2.4$ or episode reaches the $200^{th}$ step.
+
 \subsubsection{Reward}
+%Normally in games, the reward directly relates to the score of the game.
+The reward is 1 for every step taken, including the termination step. Since the maximum number of step for episode is 200 the maximum reward for episode is 200.
 
-Normally in games, the reward directly relates to the score of the game.
 
+\subsection{Algorithm Settings}
 
 \subsubsection{Loss function}
 
@@ -34,7 +38,7 @@ The loss is a value that indicates how far our prediction is from the actual tar
 
 \subsection{Hyperparameters}
 
-To make the agent perform well in long-term, we need to take into account not only the immediate rewards but also the future rewards we are going to get. In order to do this, we are going to have a \textbf{discount rate} or "gamma". This way the agent will learn to maximize the discounted future reward based on the given state.
+To make the agent perform well in long-term, we need to take into account not only the immediate rewards but also the future rewards we are going to get. In order to do this, we are going to have a \textit{discount rate} ($\gamma$). This way the agent will learn to maximize the discounted future reward based on the given state.
 \\\\\textbf{episodes}: the number of games we want the agent to play.
 \\\textbf{gamma}: discount rate, to calculate the future discounted reward.
 \\\textbf{max\_epsilon}:
