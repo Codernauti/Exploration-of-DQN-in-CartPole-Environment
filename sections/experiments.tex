@@ -48,9 +48,28 @@ To make the agent perform well in long-term, we need to take into account not on
 
 \subsection{Neural Network Architecture}
 
-For our Deep Q Network we built three different architectures: the most simple consists of an input layer of 4 units, the state features, a single fully connected hidden layer of 64 units (\textit{DQN Shallow}) with ReLU as activation function and two units, the possible actions, for the output layer. The second one is the previous network but with an additional hidden layer of 32 units with ReLU as activation function before the output layer (\textit{DQN deep}). The third configuration keeps the input and output layers of the first one, between them there are three fully connected hidden layers of 32, 16 and 8 units respectively \textit{(DQN more deep)}. The last one was created for comparing the difference between deep and shallow neural networks.
+For our Deep Q Network we built three different architectures: the most simple consists of an input layer of 4 units, the state features, a single fully connected hidden layer of 64 units (\textit{DQN Shallow}) with ReLU as activation function and two units, the possible actions, for the output layer. The second one is the previous network but with an additional hidden layer of 32 units with ReLU as activation function before the output layer (\textit{DQN deep}). %The third configuration keeps the input and output layers of the first one, between them there are three fully connected hidden layers of 32, 16 and 8 units respectively \textit{(DQN more deep)}. 
+The last one was created for comparing the difference between deep and shallow neural networks.
 
 \subsection{Test sets}
 
 We decided on picking Q-learning algorithm as a starting point for the CartPole challenge.
+
+Different seed: 32, 42, 52 with same algorithm
+
+Different DQN algorithms previously described:
+DQN algorithm presented in \cite{Mnih2015} and Double DQN algorithm presented in \cite{Hasselt:2016:DRL:3016100.3016191}.
+
+Different architectures previously described: Shallow, Deep, More Deep.
+
+Evaluation of the model trained at different episode for every configuration:
+mean and standard deviation of 100 episodes.
+
+Mean q-value of three runs with the three seeds, with maximal and minimal oscillation of the seeds results.
+
+\subsection{Configurations}
+
+% Comparing seed and stochasticity
+
+
 
