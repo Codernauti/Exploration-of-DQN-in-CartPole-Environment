@@ -16,7 +16,6 @@ Unluckily in a real context the MDP is unknown or its representation is too big
 (ex. game Go). To face this issue numerous methods were proposed. They are 
 classified as \textit{model-free} methods because they didn't need any prior knowledge and they learn only from sampling.
 
-
 \subsection{Q-learning}
 
 One method that tackles the previous issue is the \textbf{Q-learning} algorithm: a a form of \textit{temporal difference learning} \cite{Sutton:1998:IRL:551283}
@@ -60,11 +59,11 @@ In the~\cite{DBLP:journals/corr/MnihKSGAWR13} work a new successful result using
 
 DQN is a multi-layered Convolution Neural Network $Q(s, \cdotp; \theta)$ (TODO: CITARE L'ARCHITETTURA???), where $\theta$ are the parameters, that approximates the action-value function $Q$. It takes a 84x84x4 of the last four gray-scale frames as input representing the state $s$, and it outputs one predicted $Q$-value for each valid action.  
 
+As the Q-learning, DQN algorithm applies \textit{greedy} as target policy and \textit{$\epsilon$-greedy} as behaviour policy. Initially the parameter $\epsilon$ is set to 0 and it linearly decreases at each step to the minimum 0.01.
+
 %(What were the general issues?)
 %(How do they solve them?)
-One important issue faced is that the agent has to learn from noisy data highly correlate. In order to break these correlations they successfully applied the \textit{experience replay} technique~\cite{Lin:1992:RLR:168871}. It consists in building a data-set of samples, the \textit{replay memory} ($D$).
-
-At each step the algorithm stores a new sample $e_t = (s_t, a_t, r_{t+1}, s_{t+1})$ overwriting the most old one, then it applies the Q-learning update on samples of experience $(S_t, A_t, R_{t+1}, S_{t+1}) \sim U(D)$ taken uniformly at random from this memory. The Q-learning update at step $t$ uses the following loss:
+One important issue faced is that the agent has to learn from noisy data highly correlate. In order to break these correlations they successfully applied the \textit{experience replay} technique~\cite{Lin:1992:RLR:168871}. It consists in building a data-set of samples, the \textit{replay memory} ($D$), in which at each step the algorithm stores a new sample $e_t = (s_t, a_t, r_{t+1}, s_{t+1})$ overwriting the most old one. Next the algorithm applies the Q-learning update on samples of experience $(S_t, A_t, R_{t+1}, S_{t+1}) \sim U(D)$ taken uniformly at random from this memory. The Q-learning update at step $t$ uses the following loss:
 \begin{equation}
 	L_t(\theta_t) = E_{e_t \sim U(D)} % 
 		\Big[ Y^{DQN}_t - Q(S_t, A_t;\theta_t) \Big]
