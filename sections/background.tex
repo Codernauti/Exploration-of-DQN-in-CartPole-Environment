@@ -66,7 +66,7 @@ As the Q-learning, DQN algorithm applies \textit{greedy} as target policy and \t
 One important issue faced is that the agent has to learn from noisy data highly correlate. In order to break these correlations they successfully applied the \textit{experience replay} technique~\cite{Lin:1992:RLR:168871}. It consists in building a data-set of samples, the \textit{replay memory} ($D$), in which at each step the algorithm stores a new sample $e_t = (s_t, a_t, r_{t+1}, s_{t+1})$ overwriting the most old one. Next the algorithm applies the Q-learning update on samples of experience $(S_t, A_t, R_{t+1}, S_{t+1}) \sim U(D)$ taken uniformly at random from this memory. The Q-learning update at step $t$ uses the following loss:
 \begin{equation}
 	L_t(\theta_t) = E_{e_t \sim U(D)} % 
-		\Big[ Y^{DQN}_t - Q(S_t, A_t;\theta_t) \Big]
+		\Big[ \Big( Y^{DQN}_t - Q(S_t, A_t;\theta_t) \Big)^2 \Big]
 \end{equation}
 With the target define as:
 \begin{equation}
@@ -90,7 +90,7 @@ Y^{DQN_2}_t \equiv R_{t+1} + \gamma \max_{a} Q(S_{t+1}, a; \theta_t')
 \end{equation}
 
 %(What is the result?)
-\citeauthor{Mnih2015} \shortcite{Mnih2015} demonstrated that the union of \textit{experience replay}, separate \textit{target Q-network} and deep convolutional network architecture are essential for outperforming the best existing reinforcement learning methods on 43 of 57 Atari 2600 games. Furthermore the agent achieves more than 75\% of the human score on 29 games.
+\citeauthor{Mnih2015} \shortcite{Mnih2015} demonstrated that the union of \textit{experience replay}, separate \textit{target Q-network} and deep convolutional network architecture are essential for outperforming the best existing reinforcement learning methods on 43 of 57 Atari 2600 games. Furthermore the trained agents was managed to achieve more than 75\% of the human score on 29 games.
 
 
 
