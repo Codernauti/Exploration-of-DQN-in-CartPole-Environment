@@ -25,27 +25,6 @@ An episode terminates when the pole angle is more than $\pm12$ or cart position 
 The reward is 1 for every step taken, including the termination step. Since the maximum number of step for episode is 200 the maximum reward for episode is 200.
 
 
-\subsection{Algorithm Settings}
-
-\subsubsection{Loss function}
-
-The loss is a value that indicates how far our prediction is from the actual target. For example, the prediction of the model could indicate that it sees more value in pushing the right button when in fact it can gain more reward by pushing the left button. We want to decrease this gap between the prediction and the target (loss).
-[rimestare]
-\\
-\[formula\]
-\\We have chose the Mean Square Error (MSE).
-[altre?]
-
-\subsection{Hyperparameters}
-
-To make the agent perform well in long-term, we need to take into account not only the immediate rewards but also the future rewards we are going to get. In order to do this, we are going to have a \textit{discount rate} ($\gamma$). This way the agent will learn to maximize the discounted future reward based on the given state.
-\\\\\textbf{episodes}: the number of games we want the agent to play.
-\\\textbf{gamma}: discount rate, to calculate the future discounted reward.
-\\\textbf{max\_epsilon}:
-\\\textbf{min\_epsilon}:
-\\\textbf{lambda}:
-
-
 \subsection{Neural Network Architecture}
 
 For our Deep Q Network we built two different architectures: the most simple consists of an input layer of 4 units, the state features, a single fully connected hidden layer of 64 units (\textit{DQN Shallow}) with ReLU as activation function and two units, the possible actions, for the output layer. The second one is the previous network but with an additional hidden layer of 32 units with ReLU as activation function before the output layer (\textit{DQN deep}). %The third configuration keeps the input and output layers of the first one, between them there are three fully connected hidden layers of 32, 16 and 8 units respectively \textit{(DQN more deep)}. 
@@ -53,34 +32,21 @@ The last one was created for comparing the difference between deep and shallow n
 
 \subsection{Configurations}
 
-For the configuration of the DQN we started from the hyper-parameters showed in \cite{Hasselt:2016:DRL:3016100.3016191}.
+For the configuration of the DQN we started from the hyper-parameters used by \citeauthor{Hasselt:2016:DRL:3016100.3016191} \shortcite{Hasselt:2016:DRL:3016100.3016191}. Since the smaller complexity of the \textit{CartPole} environment, we set the \textit{experience replay} dataset size  to 10.000 instead of 1 Million and we updated the target network parameters every 1.000 steps ($\tau = 1000$). We used \textit{Mean Squared Error} as loss function minimized using the RMSprop optimizer with mini-batches of sizes 32.
 
-Since the smaller complexity of the \textit{CartPole} environment, we set the \textit{experience replay} dataset size  to 10.000 instead of 1 Million and we updated the target network parameters every 1.000 steps ($\tau = 1000$). We used \textit{Mean Squared Error} as loss function minimized using the RMSprop optimizer with mini-batches of sizes 32 (TODO: according with the paper).
+Each agent runs the training for a total of 3600 episodes, using \textit{$\epsilon$-greedy} with $\epsilon$ initialized to 1 decreasing linearly for 10.000 steps and then fixed at 0.01 for all the next steps.
 
-Aware that more seeds are required, specially in the reinforcement learning field \cite{DBLP:journals/corr/abs-1709-06560}, we tested our configuration with only 3 different seeds due to time constraints.
+Regarding the network architectures: \textit{shallow} and \textit{deep}, we trained different agents with the DQN algorithm \cite{Mnih2015} and the Double DQN algorithm \cite{Hasselt:2016:DRL:3016100.3016191}.
 
-Regarding the network architectures: \textit{shallow} and \textit{deep}, we trained different agents with the DQN algorithm \cite{Mnih2015} and the Double DQN algorithm \cite{Hasselt:2016:DRL:3016100.3016191} for a total of 12 runs.
+Aware that more seeds are required, specially in the reinforcement learning field \cite{DBLP:journals/corr/abs-1709-06560}, we tested our configurations with only 3 different seeds due to time constraints for a total of 12 runs.
 
-Each agent runs the training for a total of 3600 episodes, using \textit{$\epsilon$-greedy} with $\epsilon_{max}$ set to 1 and $\epsilon_{min}$ set to 0.01, decreasing according to the formula: 
-\begin{equation}
-	\epsilon = \epsilon_{min} + (\epsilon_{max} - \epsilon_{min}) \cdot e^{- \lambda t}
-\end{equation}
- where higher value of $\lambda$ means faster decay and lower value of $\lambda$ means slower decay.
-(WHY USE THIS EPSILON DECAY???)
+For all the hyper-parameters see Table ??? (TODO).
 
 % Comparing seed and stochasticity
 
-\subsection{Test sets}
-
-Different seed: 32, 42, 52 with same algorithm
-
-Different DQN algorithms previously described:
-DQN algorithm presented in \cite{Mnih2015} and Double DQN algorithm presented in \cite{Hasselt:2016:DRL:3016100.3016191}.
-
-Different architectures previously described: Shallow, Deep, More Deep.
-
 \subsection{Evaluation}
 
+(TODO)
 Evaluation of the model trained at different episode for every configuration:
 mean and standard deviation of 100 episodes.
 
