@@ -3,11 +3,10 @@
 
 \subsection{Continuous time}
 
-The version of the CartPole that we used, limits the steps to 200. It can be undoubtedly interesting, perform the same experiments on the version that has no time limits.
+The used environment of the \textit{CartPole} limits the steps to 200 for each episode. It might be interesting to perform the same experiments on the same environment with no step limits.
 
-We have observed several trained agents able to successfully overcome the task, ie able to obtain an average reward above 195 out of a total of 100 games. Many of them, get the necessary points while moving with speed to a side, "unaware" of the boundaries of the gaming environment, the left and right ends.
-In a continuous environment, this oscillation would inevitably lead them to failure.
+We observed that several trained agents were able to successfully solving the task. Many of them get the maximum reward simply pushing to one side the cart, unaware of the boundaries of the environment that are terminal states, that means less reward in the future. In a continuous environment this behaviour will leads to a bad episode encouraging the Q-learning to learn a smarter policy.
 
 \subsection{Reward function redesign}
 
-To limit the "suicidal" oscillations towards the extremes, a possible strategy, is to redesign the reward function: the reward is decremented as much as the agent is far from the center.
+Another interesting possible solution to limit the suicidal behaviour towards the edges could be to redesign the reward function. A reward that decreases as much as the agent is far from the centre might encourage the agent to learn a policy in which it's better to stay in the middle.

@@ -4,12 +4,12 @@
 Our testbed is done in the \textit{CartPole-v0} environment available in the Gym toolkit \cite{Gym}.
 In this toy problem a pole is attached by an un-actuated joint to a cart, which moves along a frictionless track. The pendulum starts upright, and the goal is to prevent it from falling over by increasing and reducing the cart's velocity. It was invented for having pseudo-standard benchmark problem from the field of control theory and artificial neural networks for designing and testing controllers on complex and unstable non-linear system.
 
-The problem is defined \textit{``solving''} if the agent get average reward of 195.0 over 100 consecutive trials. We used this as a parameter for evaluating our trained models.
+The problem is defined \textit{solving} if the agent get average reward of 195.0 over 100 consecutive trials. We used this as a parameter for evaluating our trained models.
  
-\subsubsection{State features}
+\subsubsection{States space}
 A state of the agent is described through a vector of 4 features: the  \textit{Cart Position}, \textit{Cart Velocity}, \textit{Pole Angle} and \textit{Pole Velocity At Tip} (which can be interpreted on how fast the pole is falling) .
 
-\subsubsection{Action space}
+\subsubsection{Actions space}
 Using the previous observations, the agent needs to decide on one of two possible actions: apply a left or right force to the cart. Force is described as discrete number: 0 for the left, 1 for the right.
 
 
@@ -32,7 +32,7 @@ The last one was created for comparing the difference between deep and shallow n
 
 \subsection{Configurations}
 
-For the configuration of the DQN we started from the hyper-parameters used by \citeauthor{Hasselt:2016:DRL:3016100.3016191} \shortcite{Hasselt:2016:DRL:3016100.3016191}. Since the smaller complexity of the \textit{CartPole} environment, we set the \textit{experience replay} dataset size  to 10.000 instead of 1 Million and we updated the target network parameters every 1.000 steps ($\tau = 1000$). We used \textit{Mean Squared Error} as loss function minimized using the RMSprop optimizer with mini-batches of sizes 32.
+For the configuration of the DQN we started from the hyper-parameters used by \citeauthor{Hasselt:2016:DRL:3016100.3016191} \shortcite{Hasselt:2016:DRL:3016100.3016191}. Since the smaller complexity of the \textit{CartPole} environment, we set the \textit{experience replay} dataset size  to 10000 instead of 1 Million and we updated the target network parameters every 1000 steps ($\tau = 1000$). We used \textit{Mean Squared Error} as loss function minimized using the RMSprop optimizer with mini-batches of sizes 32.
 
 Each agent runs the training for a total of 3600 episodes, using \textit{$\epsilon$-greedy} with $\epsilon$ initialized to 1 decreasing linearly for 10.000 steps and then fixed at 0.01 for all the next steps.
 
@@ -49,15 +49,15 @@ For all the hyper-parameters see Table~\ref{tab:my-hyperparams}.
 		\multicolumn{1}{|c|}{\textbf{Hyper-parameter}} &
 		\multicolumn{1}{|c|}{\textbf{Value}}        \\
 		\hline
-		minibatch size & 32 \\
-		replay memory size & 10000 \\
-		target network update frequency $\tau$ & 1000 \\
-		discount factor $\gamma$ & 0.99 \\
-		learning rate $\alpha$ & 0.00025 \\
-		gradient momentum & 0.9 \\
-		initial exploration $\epsilon$ & 1 \\
-		final exploration $\epsilon$ & 0.01 \\
-		final exploration step & 10000 \\
+		Minibatch size & 32 \\
+		Replay memory size & 10000 \\
+		Target network update frequency $\tau$ & 1000 \\
+		Discount factor $\gamma$ & 0.99 \\
+		Learning rate $\alpha$ & 0.00025 \\
+		Gradient momentum & 0.9 \\
+		Initial exploration $\epsilon$ & 1 \\
+		Final exploration $\epsilon$ & 0.01 \\
+		Final exploration step & 10000 \\
 		\hline
 	\end{tabular}
 	
@@ -70,11 +70,7 @@ For all the hyper-parameters see Table~\ref{tab:my-hyperparams}.
 
 \subsection{Evaluation}
 
-(TODO)
-Evaluation of the model trained at different episode for every configuration:
-mean and standard deviation of 100 episodes.
-
-Mean q-value of three runs with the three seeds, with maximal and minimal oscillation of the seeds results.
+We evaluated the models of the DQN taken every 100 episodes of a run. In 3600 we obtained 36 models. Each model is evaluated in an agent without Q-learning for 100 episodes. The evaluation consists of measuring the mean and the standard deviation of the reward in 100 episodes.
 
 
 
