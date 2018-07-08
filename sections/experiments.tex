@@ -4,7 +4,7 @@
 Our testbed is done in the \textit{CartPole-v0} environment available in the Gym toolkit \cite{Gym}.
 In this toy problem a pole is attached by an un-actuated joint to a cart, which moves along a frictionless track. The pendulum starts upright, and the goal is to prevent it from falling over by increasing and reducing the cart's velocity. It was invented for having pseudo-standard benchmark problem from the field of control theory and artificial neural networks for designing and testing controllers on complex and unstable non-linear system.
 
-The problem is defined \textit{``solving''} if the agent get average reward of 195.0 over 100 consecutive trials. (TODO ???) However our main goal of this experiment is the exploration and evaluation in a low-dimensional environment of the DQN algorithms previously described.
+The problem is defined \textit{``solving''} if the agent get average reward of 195.0 over 100 consecutive trials. We used this as a parameter for evaluating our trained models.
  
 \subsubsection{State features}
 A state of the agent is described through a vector of 4 features: the  \textit{Cart Position}, \textit{Cart Velocity}, \textit{Pole Angle} and \textit{Pole Velocity At Tip} (which can be interpreted on how fast the pole is falling) .
@@ -40,7 +40,31 @@ Regarding the network architectures: \textit{shallow} and \textit{deep}, we trai
 
 Aware that more seeds are required, specially in the reinforcement learning field \cite{DBLP:journals/corr/abs-1709-06560}, we tested our configurations with only 3 different seeds due to time constraints for a total of 12 runs.
 
-For all the hyper-parameters see Table ??? (TODO).
+For all the hyper-parameters see Table~\ref{tab:my-hyperparams}.
+
+\begin{table}[]
+	\centering
+	\begin{tabular}{|l|r|}
+		\hline
+		\multicolumn{1}{|c|}{\textbf{Hyper-parameter}} &
+		\multicolumn{1}{|c|}{\textbf{Value}}        \\
+		\hline
+		minibatch size & 32 \\
+		replay memory size & 10000 \\
+		target network update frequency $\tau$ & 1000 \\
+		discount factor $\gamma$ & 0.99 \\
+		learning rate $\alpha$ & 0.00025 \\
+		gradient momentum & 0.9 \\
+		initial exploration $\epsilon$ & 1 \\
+		final exploration $\epsilon$ & 0.01 \\
+		final exploration step & 10000 \\
+		\hline
+	\end{tabular}
+	
+	\caption{text}
+	\label{tab:my-hyperparams}
+\end{table}
+
 
 % Comparing seed and stochasticity
 
