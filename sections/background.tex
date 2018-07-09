@@ -9,11 +9,11 @@ the set of states, $\mathcal{A}$ is the set of actions, $\mathcal{P}$ is the
 state transition probability, $\mathcal{R}$ is the reward function (???) and 
 $\gamma$ is the discount factor determining the agent's horizon.
 
-The main goal of an agent is to interact with the environment maximizing the future rewards. In order to do this it estimates the action value function $Q$ that computes how much expected return come from a state $s$ given an action $a$: $Q(s, a) = \max_\pi E[R_t | s_t = s, a_t = a, \pi]$ where $\pi$ is a policy, that is a function that maps states to actions.
+The main goal of an agent in RL is to interact with the environment maximizing the future rewards. In order to do this it estimates the action value function $Q$ that computes how much expected return come from a state $s$ given an action $a$: $Q(s, a) = \max_\pi E[R_t | s_t = s, a_t = a, \pi]$ where $\pi$ is a policy, a function that maps states to actions.
 
 
 Unluckily in a real context the MDP is unknown or its representation is too big
-(ex. game Go). To face this issue numerous methods were proposed. They are 
+(ex. game Go). To face this issue numerous methods were proposed, they are 
 classified as \textit{model-free} methods because they didn't need any prior knowledge and they learn only from sampling.
 
 \subsection{Q-learning}

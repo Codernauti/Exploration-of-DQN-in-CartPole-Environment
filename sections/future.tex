@@ -10,3 +10,7 @@ We observed that several trained agents were able to successfully solving the ta
 \subsection{Reward function redesign}
 
 Another interesting possible solution to limit the suicidal behaviour towards the edges could be to redesign the reward function. A reward that decreases as much as the agent is far from the centre might encourage the agent to learn a policy in which it's better to stay in the middle.
+
+\subsection{Longer Time Execution}
+
+Our tests is obviously limited. The cited references for DQN and Double DQN executed for a total of 200 Million of frames, that is 50 Million of steps, while the maximum reached by our tests was 14000. Increasing the number of episode and therefore the number of steps could show better the behaviour of the Q-value.
