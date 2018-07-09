@@ -1,17 +1,21 @@
 \section{Introduction}
 
-Reinforcement Learning (RL), in the last decade is attracting more and more interest of machine learning and artificial intelligence communities, as a powerful tool for solving complex sequential decision making problems in control theory \cite{GosaviRLSurvey}.
+Reinforcement Learning (RL), in the last decade is attracting more and more interest of machine learning and artificial intelligence communities.
+
+The main objective of the research is of to develop agents who should be able to choose the actions to be performed, given the current state of the environment in which it is located, with the aim of maximizing the total reward.
 
 More recently, with the leveraging on the rapid growth in the amount of the annotated data and the great improvements in the strengths of graphics processor units, the research on  Deep Learning (DL) has been emerged and led to very good performance on a variety of problems, such as visual recognition, speech recognition and natural language processing \cite{AdvancesCNN}.
 
 Reinforcement algorithms that incorporate deep learning is enabling to scale to problems considered previously intractable.
 
-Some of the most amazing results have been obtained by Google’s DeepMind, who has trained agents capable to defeated Go champion, Le Sedol, in march 2016, four games to one, or able to achieve the performance of expert humans in playing numerous Atari video games.
+Some of the most amazing results have been obtained by Google’s DeepMind, who has trained agents capable to defeated Go champion, Le Sedol, in march 2016, four games to one, or able to achieve the performance of expert humans in playing numerous Atari video games learning directly from pixels.
 
 OpenAI's bot has beaten the world's top professionals at 1v1 matches of Dota 2 under standard tournament rules, after learning the rules of the game from scratch by self-play.
 They released Gym toolkit \cite{Gym}, a collection of test problems designed for testing and developing reinforcement learning algorithms, included 57 games of Atari 2600 and the MuJoCo physics engine, where simulated robot agents can be controlled by the position and velocity of each joint. 
 \\\\
+The goal of this work is to implement the DQN algorithms, comparing the basic version with the Double DQN versions. Tracing initially the experiments performed in Atari environment (specifically we started from Pong, one of the most popular), we soon clashed with computational limits, due to the huge number of game states, in addition to the pixel computing of the game frames. We have therefore chosen to start from a relatively simpler problem: the CartPole, provided by Gym.
+\\\\
 This paper is organized as follows:
-The following section present an overview of the reinforcement learning methods and algorithms. In the Experiments section, we introduce the environment and the tasks of the CartPole problem (game?).
+The following section present an overview of the reinforcement learning methods and algorithms. In the Experiments section, we introduce the environment and the tasks of the CartPole problem.
 Follow the analysis of the experiment results. In Future Work we propose some of the possible future experiments.
 Finally, we end with a general analysis of the work the main challenges faced.
