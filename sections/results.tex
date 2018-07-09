@@ -10,17 +10,6 @@ A more interesting viewpoint is the overestimation issue. If the reward is nonze
 
 From Figure~\ref{fig:q-values} we can see that the trends of all the configuration is to converge to 100. As described by \citeauthor{Hasselt:2016:DRL:3016100.3016191} \shortcite{Hasselt:2016:DRL:3016100.3016191} the Double Q-learning reduces the overestimation, in particular for the \textit{Double DQN deep} configuration, the \textit{DQN deep} suffers definitely of overestimation. For \textit{DQN shallow} configurations instead the differences are small, maybe the differences could start in later epochs.
 
-\subsection{Evaluation}
-
-% Theses:
-From the results of evaluation sessions we saw that our \textit{DQN deep} is better in general
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.48\textwidth]{res/Comparison}
-\end{figure}
-
-
 \begin{figure*}[t]
 	\centering
 	\subfloat{\includegraphics[width=.48\textwidth]{res/DQN_Shallow}} \quad
@@ -35,3 +24,16 @@ From the results of evaluation sessions we saw that our \textit{DQN deep} is bet
 	\caption{The blue lines in the figure represents the median of the Q-value  per epoch (the average Q-value computed every 64 steps) from the executions of 3 seeds for each configuration. The red line shows the maximum and minimum values from the results.}
 	\label{fig:q-values}
 \end{figure*}
+
+
+\subsection{Evaluation}
+
+% Theses:
+From the results of evaluation (Figure~\ref{fig:comparison})of the model we can see that our \textit{DQN deep} is better for all the seeds. The model after 1000 episodes of learning is able to \textit{solve} the \textit{CartPole} problem. A further interesting fact that emerges from the Figure~\ref{fig:comparison} is that a different seed could imply a good or a bad learning process. The \textit{DQN shallow} configuration showed for the best seed it takes 1300 episode in order to solve the problem while the seed 52 takes 2000 episode.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.48\textwidth]{res/Comparison}
+	\caption{text}
+	\label{fig:comparison}
+\end{figure}

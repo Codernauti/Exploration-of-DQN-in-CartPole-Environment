@@ -4,7 +4,7 @@
 Our testbed is done in the \textit{CartPole-v0} environment available in the Gym toolkit \cite{Gym}.
 In this toy problem a pole is attached by an un-actuated joint to a cart, which moves along a frictionless track. The pendulum starts upright, and the goal is to prevent it from falling over by increasing and reducing the cart's velocity. It was invented for having pseudo-standard benchmark problem from the field of control theory and artificial neural networks for designing and testing controllers on complex and unstable non-linear system.
 
-The problem is defined \textit{solving} if the agent get average reward of 195.0 over 100 consecutive trials. We used this as a parameter for evaluating our trained models.
+The problem is defined as \textit{solved} if the agent get average reward of 195.0 over 100 consecutive trials. We used this as a parameter for evaluating our trained models.
  
 \subsubsection{States space}
 A state of the agent is described through a vector of 4 features: the  \textit{Cart Position}, \textit{Cart Velocity}, \textit{Pole Angle} and \textit{Pole Velocity At Tip} (which can be interpreted on how fast the pole is falling) .
@@ -71,7 +71,7 @@ Aware that more runs are required, specially in the reinforcement learning field
 
 \subsection{Evaluation Settings}
 
-We evaluated the models taken every 100 episodes of an execution, each execution lasted 3600 episodes for a total of 36 models for each configuration. Each model is evaluated in an agent without Q-learning for 100 episodes. The evaluation consists of measuring the mean and the standard deviation of the reward in 100 episodes.
+Every 100 episodes of an execution we saved a model of the neural network, since an execution run for 3600 episodes we obtained 35 models for each configuration. Each model is evaluated in an agent without Q-learning for 100 episodes. During the evaluation we measured the average reward.
 
 
 
