@@ -6,10 +6,10 @@ The interaction between the agent and the environment is described  with the
 Markov Decision Process (MDP) formalism. A MDP is a tupla $\langle \mathcal{S}, 
 \mathcal{A}, \mathcal{P}, \mathcal{R}, \gamma \rangle$ where $\mathcal{S}$ is
 the set of states, $\mathcal{A}$ is the set of actions, $\mathcal{P}$ is the 
-state transition probability, $\mathcal{R}$ is the reward function (???) and 
-$\gamma$ is the discount factor determining the agent's horizon.
+state transition probability, $\mathcal{R}$ is the reward function and 
+$\gamma \in [0,1]$ is the discount factor determining the agent's horizon.
 
-The main goal of an agent in RL is to interact with the environment maximizing the future rewards. In order to do this it estimates the action value function $Q$ that computes how much expected return come from a state $s$ given an action $a$: $Q(s, a) = \max_\pi E[R_t | s_t = s, a_t = a, \pi]$ where $\pi$ is a policy, a function that maps states to actions.
+The main goal of an agent in RL is to interact with the environment maximizing the future rewards. In order to do this it estimates the action value function $Q$ that computes how much expected return come from a state $s$ given an action $a$: $Q^*(s, a) = \max_\pi E[ G_t | s_t = s, a_t = a, \pi]$ where $\pi$ is a policy, a function that maps states to actions and $G_t = R_t + \gamma~R_{t+1} + \gamma^2~R_{t+2} + \dots$ is the discounted return.
 
 
 Unluckily in a real context the MDP is unknown or its representation is too big
@@ -18,7 +18,7 @@ classified as \textit{model-free} methods because they didn't need any prior kno
 
 \subsection{Q-learning}
 
-One method that tackles the previous issue is the \textbf{Q-learning} algorithm: a a form of \textit{temporal difference learning} \cite{Sutton:1998:IRL:551283}
+One method that tackles the previous issue is the \textbf{Q-learning} algorithm: a form of \textit{temporal difference learning} \cite{Sutton:1998:IRL:551283}
 
 Q-learning is defined as a \textit{model-free} \textit{off-policy} method \cite{Watkins1992}. \textit{Off-policy} means that the Q-learning learns using two policy. The first one is the target policy $\pi$, that follows the \textit{greedy} strategy $a = \max_a Q(s, a; \theta)$, that is selecting always the action that will return the maximum reward.
 The second one is the \textit{behavior policy} $\mu$ that ensures an exploration of the states space, typically an \textit{$\epsilon$-greedy} strategy. \textit{$\epsilon$-greedy} is a greedy strategy only with probability $1 - \epsilon$ and selects a random action with probability $\epsilon$.
@@ -41,11 +41,12 @@ Finally $S'$ is assigned to $S$. The iteration goes on until $S$ is a terminal s
 %(What do the authors want to do?)
 In the~\cite{DBLP:journals/corr/MnihKSGAWR13} work a new successful result using Q-learning was obtained implementing the first version of the \textbf{Deep Q Network} (\textbf{DQN}) \textbf{algorithm}. This DQN trained with Q-learning has learnt successfully to play 7 Atari 2600 games only from high-dimensional sensory input given by the \textit{Atari Learning Environment} \cite{ArcadeLearningEnvironment}.
 
-% Think better if put this table
+
 \begin{table}[]
+	\centering
 	\begin{tabular}{|l|r|}
 		\hline
-		\multicolumn{1}{|c|}{\textbf{Hyper-parameter}} &
+		\multicolumn{1}{|c|}{\textbf{Hyperparameter}} &
 		\multicolumn{1}{|c|}{\textbf{Value}}        \\
 		\hline
 		Discount factor $\gamma$ & 0.99                        \\
@@ -55,11 +56,14 @@ In the~\cite{DBLP:journals/corr/MnihKSGAWR13} work a new successful result using
 		Exploration policy       & From 1 to 0.1 over 1M steps \\
 		\hline
 	\end{tabular}
+	\caption{Hyperparameters used in DQN algorithm and Double DQN algorithm.}
+	\label{fig:dqn-hyperparams}
 \end{table}
 
-DQN is a multi-layered Convolution Neural Network $Q(s, \cdotp; \theta)$ (TODO: CITARE L'ARCHITETTURA???), where $\theta$ are the parameters, that approximates the action-value function $Q$. It takes a 84x84x4 of the last four gray-scale frames as input representing the state $s$, and it outputs one predicted $Q$-value for each valid action.  
+DQN is a multi-layered Convolution Neural Network $Q(s, \cdotp; \theta)$ %(TODO: CITARE L'ARCHITETTURA???), % 
+where $\theta$ are the parameters, that approximates the action-value function $Q$. It takes a 84x84x4 of the last four gray-scale frames as input representing the state $s$, and it outputs one predicted $Q$-value for each valid action.  
 
-As the Q-learning, DQN algorithm applies \textit{greedy} as target policy and \textit{$\epsilon$-greedy} as behaviour policy. Initially the parameter $\epsilon$ is set to 0 and it linearly decreases at each step to the minimum 0.01.
+As the Q-learning, DQN algorithm applies \textit{greedy} as target policy and \textit{$\epsilon$-greedy} as behaviour policy. Initially the parameter $\epsilon$ is set to 0 and it linearly decreases at each step to the minimum 0.01. The main hyperparameters are showed in Table~\ref{fig:dqn-hyperparams}.
 
 %(What were the general issues?)
 %(How do they solve them?)
@@ -82,8 +86,7 @@ Using \textit{experience replay} implies a greater data efficiency since each sa
 
 %(What do the authors want to do?)
 In the article \textit{Human-level control through deep reinforcement learning}~\cite{Mnih2015} the \textbf{DQN algorithm} is improved using a \textit{target network} in addition to \textit{experience replay}.
-
-%(How does the algorithm work?)
+%(How does the algorithm work?) %
 The second version of DQN algorithm applies an \textit{$\epsilon$-greedy} policy with the network $Q(s, \cdotp; \theta)$ (\textit{online network}) and it applies the \textit{greedy} policy with the \emph{different} network $Q(s, \cdotp; \theta')$ (\textit{target network}). The parameters $\theta'$ are updated with a periodically copy of the $\theta$ parameters from the \textit{online network}. The target is now defined as:
 \begin{equation}
 Y^{DQN_2}_t \equiv R_{t+1} + \gamma \max_{a} Q(S_{t+1}, a; \theta_t')
@@ -115,6 +118,6 @@ In order to reduce this overestimation \citeauthor{Hasselt:2016:DRL:3016100.3016
 		\arg\max_{a} Q(S_{t+1}, a; \theta_t); \theta_t^-)
 \end{equation}
 
-Using the exact same hyper-parameters of DQN algorithm the Double DQN obtained clearly better results showing that reducing overestimations can significantly benefit the stability of learning.
+Using the exact same hyperparameters of DQN algorithm the Double DQN obtained clearly better results showing that reducing overestimations can significantly benefit the stability of learning.
 
 
