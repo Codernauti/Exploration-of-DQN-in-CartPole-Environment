@@ -1,0 +1,21 @@
+\BOOKMARK [1][-]{section*.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section*.2}{Background}{}% 2
+\BOOKMARK [2][-]{section*.3}{Q-learning}{section*.2}% 3
+\BOOKMARK [2][-]{section*.4}{Deep Q Network algorithm}{section*.2}% 4
+\BOOKMARK [2][-]{section*.6}{Double Q-learning}{section*.2}% 5
+\BOOKMARK [2][-]{section*.7}{Double Deep Q Network Algorithm}{section*.2}% 6
+\BOOKMARK [1][-]{section*.8}{Experiments}{}% 7
+\BOOKMARK [2][-]{section*.9}{Environment}{section*.8}% 8
+\BOOKMARK [2][-]{section*.14}{Neural Network Architecture}{section*.8}% 9
+\BOOKMARK [2][-]{section*.15}{General Settings}{section*.8}% 10
+\BOOKMARK [2][-]{section*.17}{Configurations}{section*.8}% 11
+\BOOKMARK [2][-]{section*.18}{Evaluation Settings}{section*.8}% 12
+\BOOKMARK [2][-]{section*.19}{Technology}{section*.8}% 13
+\BOOKMARK [1][-]{section*.20}{Results Discussion}{}% 14
+\BOOKMARK [2][-]{section*.21}{Training}{section*.20}% 15
+\BOOKMARK [2][-]{section*.23}{Evaluation}{section*.20}% 16
+\BOOKMARK [1][-]{section*.25}{Future Works}{}% 17
+\BOOKMARK [2][-]{section*.26}{Continuous time}{section*.25}% 18
+\BOOKMARK [2][-]{section*.27}{Reward function redesign}{section*.25}% 19
+\BOOKMARK [2][-]{section*.28}{Longer Time Execution}{section*.25}% 20
+\BOOKMARK [1][-]{section*.29}{Conclusions}{}% 21
