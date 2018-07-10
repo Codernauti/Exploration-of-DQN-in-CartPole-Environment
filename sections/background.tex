@@ -1,6 +1,5 @@
 \section{Background}
 
-(TODO)
 %The agent each step t interact with the environment and receive a reward. 
 The interaction between the agent and the environment is described  with the
 Markov Decision Process (MDP) formalism. A MDP is a tupla $\langle \mathcal{S}, 
@@ -39,8 +38,7 @@ Finally $S'$ is assigned to $S$. The iteration goes on until $S$ is a terminal s
 \label{subsec:DQN}
 
 %(What do the authors want to do?)
-In the~\cite{DBLP:journals/corr/MnihKSGAWR13} work a new successful result using Q-learning was obtained implementing the first version of the \textbf{Deep Q Network} (\textbf{DQN}) \textbf{algorithm}. This DQN trained with Q-learning has learnt successfully to play 7 Atari 2600 games only from high-dimensional sensory input given by the \textit{Atari Learning Environment} \cite{ArcadeLearningEnvironment}.
-
+In the \textit{Playing Atari with Deep Reinforcement Learning}~\cite{DBLP:journals/corr/MnihKSGAWR13} work a new successful result using Q-learning was obtained implementing the first version of the \textbf{Deep Q Network} (\textbf{DQN}) \textbf{algorithm}. This DQN trained with Q-learning learnt successfully to play 7 Atari 2600 games only from high-dimensional sensory input (pixels) given by the \textit{Atari Learning Environment} \cite{ArcadeLearningEnvironment}.
 
 \begin{table}[]
 	\centering
@@ -100,11 +98,11 @@ Y^{DQN_2}_t \equiv R_{t+1} + \gamma \max_{a} Q(S_{t+1}, a; \theta_t')
 \subsection{Double Q-learning}
 \label{subsec:DoubleQlearning}
 
-It is known that Q-learning overestimates the action-value function~\cite{NIPS2010_3964}. This is caused by the approximation of the maximal estimator $\max_a Q(S_{t+1}, a)$ that is a bias estimator of $max_a E \{ Q(S_{t+1}, a) \}$, this bias is cumulative at each update. In order to remove this effect the \textbf{Double Q-learning} algorithm has been proposed~\cite{NIPS2010_3964}.
+It is known that Q-learning overestimates the action-value function~\cite{NIPS2010_3964}. This is caused by the approximation of the maximal estimator $\max_a Q(S_{t+1}, a)$ that is a bias estimator of $max_a E \{ Q(S_{t+1}, a) \}$, this bias is cumulative at each update. In order to remove this effect the \textbf{Double Q-learning} algorithm was proposed~\cite{NIPS2010_3964}.
 
 The main idea of Double Q-learning is to use a double estimator: keeping two action-value function $Q^A$ and $Q^B$. At each step only one of two function is updated and in the update instead of using the $Q^A(S{t+1}, a^*) = \max_a Q(S_{t+1}, a)$ where $a^* = \max_a Q^A(S_{t+1}, a)$ it is used $Q^B(S_{t+1}, a^*)$.
-Van Hasselt (2010) has proved mathematically and in small environments that the Double Q-learning is more accurate than Q-learning and sometimes underestimate.
-
+Van Hasselt (2010) proved mathematically and in small environments that the Double Q-learning is more accurate than Q-learning and sometimes underestimate.
+\
 \subsection{Double Deep Q Network Algorithm}
 
 % What did the authors demontrate?
