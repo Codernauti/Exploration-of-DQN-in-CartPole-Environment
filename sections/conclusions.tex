@@ -11,10 +11,10 @@ The difficult to debug even though the use of technologies facility as Keras
 
 Long times of testing means high difficulties for the debugging process.
 
-The difficult to interpret the results, in order to see better the convergence we have to take the average Q-value from 64 steps, and still we have problem because the graphics may fool the conclusion in two ways: first we haven't guarantees that in the next steps not computed the Q-value estimates won't have weird behaviours. Give a look to the bottom right plot in Figure~\ref{fig:q-values} after 12000 epochs, I need to compute the next epoch in order to have valid empirical results and this implies longer time. 
+The difficult to interpret the results, in order to see better the convergence we have to take the average Q-value from 64 steps, and still we have problem because the graphics may fool the conclusion in two ways: first we haven't guarantees that in the next steps not computed the Q-value estimates won't have weird behaviours. Give a look to the bottom right plot in Figure~\ref{fig:q-values} after 12000 epochs, we need to compute the next epoch in order to have valid empirical results and this implies longer time. 
 
 Longer time of testing means another difficulties to the debugging process of a Deep Reinforcement Learning method. Follow the issue with the large number of hyperparameters to set opportunely and also their unknown relations worsen the debugging.
 
 The stochasticity sometimes causes to drastically change the outcomes hence we can have good model and bad model with the same exact algorithm implementation. Take in consideration more seeds can help but this implies the use of more resources. 
 
-From all that critiques is clear that Deep Reinforcement Learning is still an academic research area that still don't found application in businesses. Besides that the recent progress shown that probably in the future we at least have auto-learning bot in videogames.
+From all that critiques is clear that Deep Reinforcement Learning is still an academic research area that still not ready to found application in businesses. Besides that the recent progress shown that probably in the future we at least have auto-learning bot in videogames.
