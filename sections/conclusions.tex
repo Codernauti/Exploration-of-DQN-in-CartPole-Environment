@@ -5,14 +5,4 @@ An algorithm that achieved state-of-the-art performance in the \textit{Atari Emu
 
 We implemented the DQN algorithm and we tried to explore its potential in the toy control environment \textit{CartPole}. Without the need of tuning we showed that DQN was able to solve the problem with discrete results. We shows also that the introduction of the Double DQN improve a little the performance and comparing to DQN algorithm reduce the overestimation as \citeauthor{Hasselt:2016:DRL:3016100.3016191} \shortcite{Hasselt:2016:DRL:3016100.3016191} demonstrated.
 
-We faced several issues. In particular after an initial effort for understanding the RL area, we had difficulties on debugging, a typical intrinsic issue in DRL area~\cite{rlblogpost} and on interpreting the noisy Data. Long testing times strongly limited the number of configurations analysed.
-
-
-
-%The difficult to interpret the results, in order to see better the convergence we have to take the average Q-value from 64 steps, and still we have problem because the graphics may fool the conclusion in two ways: first we haven't guarantees that in the next steps not computed the Q-value estimates won't have weird behaviours. Give a look to the bottom right plot in Figure~\ref{fig:q-values} after 12000 epochs, we need to compute the next epoch in order to have valid empirical results and this implies longer time. 
-
-
-
-%The stochasticity sometimes causes to drastically change the outcomes hence we can have good model and bad model with the same exact algorithm implementation. Take in consideration more seeds can help but this implies the use of more resources. 
-
-%From all that critiques is clear that Deep Reinforcement Learning is still an academic research area that still not ready to found application in businesses. Besides that the recent progress shown that probably in the future we at least have auto-learning bot in videogames.
+Despite the issues faced with data and debugging, with this experiment we have seen how DQN algorithm can be considered a base for carrying on future researches in this area. 

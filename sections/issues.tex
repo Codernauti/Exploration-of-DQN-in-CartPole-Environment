@@ -1,0 +1,9 @@
+
+\section{Issues}
+
+We faced several issues. In particular after an initial effort for understanding the RL area, we had difficulties on debugging, a typical intrinsic issue in Deep Reinforcement Learning area~\cite{rlblogpost} and on interpreting the noisy Data. In fact in order to see better the convergence we have to take the average Q-value from 64 steps.
+
+Another issues is that we have no guarantees that in the next not computed steps the Q-value estimates will not have weird behaviours. An example is the bottom right plot in Figure~\ref{fig:q-values} where after 12000 epoch it seems like a bad behaviour is happening.
+
+Furthermore long testing times due to unoptimized code and limited hardware resources strongly restricted the number of configurations that we analysed.
+

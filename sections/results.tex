@@ -10,7 +10,7 @@ A more interesting viewpoint is the overestimation issue. If the reward is nonze
 
 From Figure~\ref{fig:q-values} we can see that the trends of all the configuration is to converge to 100. As described by \citeauthor{Hasselt:2016:DRL:3016100.3016191} \shortcite{Hasselt:2016:DRL:3016100.3016191} the Double Q-learning reduces the overestimation, in particular for the \textit{Double DQN deep} configuration, the \textit{DQN deep} suffers definitely of overestimation. For \textit{DQN shallow} configurations instead the differences are small, maybe the differences could start in later epochs.
 
-\begin{figure*}[t]
+\begin{figure*}[]
 	\centering
 	\subfloat{\includegraphics[width=.48\textwidth]{res/DQN_Shallow}} \quad
 	\subfloat{\includegraphics[width=.48\textwidth]{res/DoubleDQN_Shallow}} \\
@@ -29,13 +29,40 @@ From Figure~\ref{fig:q-values} we can see that the trends of all the configurati
 \subsection{Evaluation}
 
 % Theses:
-From the results of evaluation (Figure~\ref{fig:comparison}) of the model we can see that our \textit{DQN deep} is better for all the seeds. The model after 1000 episodes of learning is able to \textit{solve} the \textit{CartPole} problem. It is a good result considering that we not tuned the algorithm hyperparameters.
-
-A further interesting fact that emerges from the Figure~\ref{fig:comparison} is that a different seed could imply a good or a bad learning process. The \textit{DQN shallow} configuration showed that for the best seed it needs 1300 episode in order to solve the problem while with the seed 52 it needs 2000 episode. This is caused from a great component of randomness in the DQN algorithm: the probability involves in \textit{$\epsilon$-greedy}, the random selection of mini-batches from the \textit{experience replay} dataset, the random initialization of the parameter of the Q network and the randomness in the environment.
+From the results of evaluation (Figure~\ref{fig:comparison}) of the model we can see that \textit{double} and \textit{deep} settings have the better results. The learning agents, after 1000 episodes are able to \textit{solve} the \textit{CartPole} problem. It is a good result considering that we not tuned the algorithm hyperparameters. However we consider the best model from 3 run with different seed. 
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.48\textwidth]{res/Comparison}
-	\caption{text}
+	\caption{Number of episodes necessary to solve the \textit{CartPole} problem for each configuration. The value is selected from the best runs.}
 	\label{fig:comparison}
 \end{figure}
+
+In fact from the Table~\ref{tab:comparison_table} emerges that a different seed could imply a good or a bad learning process. The \textit{DQN shallow} configuration showed that for the best seed it needs 1300 episode in order to solve the problem while with the seed 52 it needs 2000 episode. This is caused from a great component of randomness in the DQN algorithm: the probability involves in \textit{$\epsilon$-greedy}, the random selection of mini-batches from the \textit{experience replay} dataset, the random initialization of the parameter of the Q network and the randomness in the environment.
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		\textbf{Configuration} & \textbf{Seed} & \textbf{Good models} & \textbf{Solved (Ep.)} \\
+		\hline
+			 & 32 & 10 / 35 & 1000 \\
+		DDQN & 42 & 6 / 35 & 1500 \\
+			 & 52 & 6 / 35 & 1000 \\
+		\hline
+		 		& 32 & 13 / 35 & 1000 \\
+		DDQN deep  & 42 & 10 / 35 & 1000 \\
+				  & 52 & 12 / 35 & 1200 \\
+		\hline
+			& 32 & 5 / 35 & 1700 \\
+		DQN	& 42 & 3 / 35 & 1300 \\
+			& 52 & 5 / 35 & 2000 \\
+		\hline
+				 & 32 & 12 / 35 & 1000 \\
+		DQN deep & 42 & 11 / 35 & 1000 \\
+				 & 52 & 6 / 35 & 1300 \\
+		\hline
+	\end{tabular}
+	\caption{Results from evaluation. For each configuration with a seed, a model every 100 episode was evaluated. Good models represent the number of models that solved the \textit{CartPole} problem. Solved column shows the number of episodes necessary for obtaining the first solving model.}
+	\label{tab:comparison_table}
+\end{table}
