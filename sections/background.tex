@@ -6,7 +6,7 @@ Markov Decision Process (MDP) formalism. A MDP is a tupla $\langle \mathcal{S},
 \mathcal{A}, \mathcal{P}, \mathcal{R}, \gamma \rangle$ where $\mathcal{S}$ is
 the set of states, $\mathcal{A}$ is the set of actions, $\mathcal{P}$ is the 
 state transition probability, $\mathcal{R}$ is the reward function and 
-$\gamma \in [0,1]$ is the discount factor determining the agent's horizon.
+$\gamma \in [0,1]$ is the discount factor determining the agent's horizon. A low $\gamma$ value means an agent that prefer the present rewards while an high $\gamma$ value mean an agent that prefer the future reward.
 
 The main goal of an agent in RL is to interact with the environment maximizing the future rewards. In order to do this it estimates the action value function $Q$ that computes how much expected return comes from a state $s$ given an action $a$: $Q^*(s, a) = \max_\pi E[ G_t | s_t = s, a_t = a, \pi]$ where $\pi$ is a policy, a function that maps states to actions and $G_t = R_t + \gamma~R_{t+1} + \gamma^2~R_{t+2} + \dots$ is the discounted return.
 

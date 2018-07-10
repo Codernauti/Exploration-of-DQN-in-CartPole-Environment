@@ -31,7 +31,7 @@ From Figure~\ref{fig:q-values} we can see that the trends of all the configurati
 % Theses:
 From the results of evaluation (Figure~\ref{fig:comparison}) of the model we can see that our \textit{DQN deep} is better for all the seeds. The model after 1000 episodes of learning is able to \textit{solve} the \textit{CartPole} problem. It is a good result considering that we not tuned the algorithm hyperparameters.
 
-A further interesting fact that emerges from the Figure~\ref{fig:comparison} is that a different seed could imply a good or a bad learning process. The \textit{DQN shallow} configuration showed that for the best seed needs 1300 episode in order to solve the problem while the seed 52 needs 2000 episode.
+A further interesting fact that emerges from the Figure~\ref{fig:comparison} is that a different seed could imply a good or a bad learning process. The \textit{DQN shallow} configuration showed that for the best seed it needs 1300 episode in order to solve the problem while with the seed 52 it needs 2000 episode. This is caused from a great component of randomness in the DQN algorithm: the probability involves in \textit{$\epsilon$-greedy}, the random selection of mini-batches from the \textit{experience replay} dataset, the random initialization of the parameter of the Q network and the randomness in the environment.
 
 \begin{figure}
 	\centering
