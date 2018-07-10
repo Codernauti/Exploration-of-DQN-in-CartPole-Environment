@@ -19,9 +19,9 @@ Unluckily in a real context the MDP is unknown or its representation is too big
 One method that tackles the previous issue is the \textbf{Q-learning} algorithm: a form of \textit{temporal difference learning} \cite{Sutton:1998:IRL:551283}
 
 Q-learning is defined as a \textit{model-free} \textit{off-policy} method \cite{Watkins1992}. \textit{Off-policy} means that the Q-learning learns using two policy. The first one is the target policy $\pi$, that follows the \textit{greedy} strategy $a = \max_a Q(s, a; \theta)$, that is selecting always the action that will return the maximum reward.
-The second one is the \textit{behavior policy} $\mu$ that ensures an exploration of the states space, typically an \textit{$\epsilon$-greedy} strategy. \textit{$\epsilon$-greedy} is a greedy strategy only with probability $1 - \epsilon$ and selects a random action with probability $\epsilon$.
+The second one is the \textit{behavior policy} $\mu$ that ensures an exploration of the states space, typically an \textit{$\epsilon$-greedy} strategy. \textit{$\epsilon$-greedy} with probability $1 - \epsilon$ is a greedy strategy while with probability $\epsilon$ it selects a random action.
 
-The Q-learning first initialize arbitrarily the $Q(s,a)$ except for the terminal state where $Q$ is initialize to 0.
+The Q-learning first initialize arbitrarily the $Q(s,a)$ except for the terminal state where $Q$ is initialized to 0.
 The agent from the initial state $S_0$ starts the iteration identified by a step $t$. Inside this loop the agent choose an action $A_t$ from $S_t$ (current state) using the \textit{behavior policy}. Then it takes the action $A_t$ and observe from the environment the immediate reward $R_{t+1}$ and the resulting state $S_{t+1}$ with which it estimates the action-value function through the following update rule:
 \begin{equation}
 	Q(S_t, A_t) = Q(S_t, A_t) + \alpha (Y^Q_t - Q(S_t, A_t))
@@ -31,13 +31,13 @@ Where $\alpha$ is a scalar step size and the target $Y^Q_t$ is defined as
 	Y^Q_t \equiv R_{t+1} + \gamma \max_{a} Q(S_{t+1}, a)
 \end{equation}
 
-Finally $S'$ is assigned to $S$. The iteration goes on until $S$ is a terminal state.
+Finally $S_{t+1}$ is set as the current state. The iteration goes on until $S_{t+1}$ is a terminal state.
 
 \subsection{Deep Q Network algorithm}
 \label{subsec:DQN}
 
 %(What do the authors want to do?)
-In the \textit{Playing Atari with Deep Reinforcement Learning}~\cite{DBLP:journals/corr/MnihKSGAWR13} work a new successful result using Q-learning was obtained implementing the first version of the \textbf{Deep Q Network} (\textbf{DQN}) \textbf{algorithm}. This DQN trained with Q-learning learnt successfully to play 7 Atari 2600 games only from high-dimensional sensory input (pixels) given by the \textit{Atari Learning Environment} \cite{ArcadeLearningEnvironment}.
+In the \textit{Playing Atari with Deep Reinforcement Learning}~\cite{DBLP:journals/corr/MnihKSGAWR13} work a new successful result using Q-learning was obtained by implementing the first version of the \textbf{Deep Q Network} (\textbf{DQN}) \textbf{algorithm}. This DQN trained with Q-learning learnt successfully to play 7 Atari 2600 games only from high-dimensional sensory input (pixels) given by the \textit{Atari Learning Environment} \cite{ArcadeLearningEnvironment}.
 
 \begin{table}[]
 	\centering
@@ -60,14 +60,14 @@ In the \textit{Playing Atari with Deep Reinforcement Learning}~\cite{DBLP:journa
 DQN is a multi-layered Convolution Neural Network $Q(s, \cdotp; \theta)$ %(TODO: CITARE L'ARCHITETTURA???), % 
 where $\theta$ are the parameters, that approximates the action-value function $Q$. It takes a 84x84x4 of the last four gray-scale frames as input representing the state $s$, and it outputs one predicted $Q$-value for each valid action.  
 
-As the Q-learning, DQN algorithm applies \textit{greedy} as target policy and \textit{$\epsilon$-greedy} as behaviour policy. Initially the parameter $\epsilon$ is set to 0 and it linearly decreases at each step to the minimum 0.01. The main hyperparameters are showed in Table~\ref{fig:dqn-hyperparams}.
+As the Q-learning, DQN algorithm applies \textit{greedy} as target policy and \textit{$\epsilon$-greedy} as behaviour policy. Initially the parameter $\epsilon$ is set to 1 and it linearly decreases at each step to the minimum 0.1. The main hyperparameters are showed in Table~\ref{fig:dqn-hyperparams}.
 
 %(What were the general issues?)
 %(How do they solve them?)
 One important issue faced is that the agent has to learn from noisy data highly correlate. In order to break these correlations they successfully applied the \textit{experience replay} technique~\cite{Lin:1992:RLR:168871}. It consists in building a data-set of samples, the \textit{replay memory} ($D$), in which at each step the algorithm stores a new sample $e_t = (s_t, a_t, r_{t+1}, s_{t+1})$ overwriting the most old one. Next the algorithm applies the Q-learning update on samples of experience $(S_t, A_t, R_{t+1}, S_{t+1}) \sim U(D)$ taken uniformly at random from this memory. The Q-learning update at step $t$ uses the following loss:
 \begin{equation}
 	L_t(\theta_t) = E_{e_t \sim U(D)} % 
-		\Big[ \Big( Y^{DQN}_t - Q(S_t, A_t;\theta_t) \Big)^2 \Big]
+		\Big[ \Big( Y^{DQN_1}_t - Q(S_t, A_t;\theta_t) \Big)^2 \Big]
 \end{equation}
 With the target define as:
 \begin{equation}
