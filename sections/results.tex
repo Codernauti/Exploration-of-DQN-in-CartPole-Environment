@@ -21,7 +21,7 @@ From Figure~\ref{fig:q-values} we can see that the trends of all the configurati
 	%{\includegraphics[width=.45\textwidth]{Cascata}} \quad
 	%\subfloat[][\emph{Salita e discesa}.]
 	%{\includegraphics[width=.45\textwidth]{SalitaDiscesa}}
-	\caption{The blue lines in the figure represents the median of the Q-value  per epoch (the average Q-value computed every 64 steps) from the executions of 3 seeds for each configuration. The red line shows the maximum and minimum values from the results.}
+	\caption{The plots shows the Q-value estimates performance for each configuration running for 3600 episodes. Each episode performs every step depending on the good or bad interaction of the agent. This means that some agent finished in less steps. Each point on the blue lines is the median Q-value per epoch (the average Q-value computed every 64 steps) of 3 executions with different seed. The red area shows the maximum and minimum Q-value per epoch of 3 executions with different seed.}
 	\label{fig:q-values}
 \end{figure*}
 
@@ -31,7 +31,7 @@ From Figure~\ref{fig:q-values} we can see that the trends of all the configurati
 % Theses:
 From the results of evaluation (Figure~\ref{fig:comparison}) of the model we can see that our \textit{DQN deep} is better for all the seeds. The model after 1000 episodes of learning is able to \textit{solve} the \textit{CartPole} problem. It is a good result considering that we not tuned the algorithm hyperparameters.
 
-A further interesting fact that emerges from the Figure~\ref{fig:comparison} is that a different seed could imply a good or a bad learning process. The \textit{DQN shallow} configuration showed for the best seed it takes 1300 episode in order to solve the problem while the seed 52 takes 2000 episode.
+A further interesting fact that emerges from the Figure~\ref{fig:comparison} is that a different seed could imply a good or a bad learning process. The \textit{DQN shallow} configuration showed that for the best seed needs 1300 episode in order to solve the problem while the seed 52 needs 2000 episode.
 
 \begin{figure}
 	\centering
