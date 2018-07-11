@@ -5,7 +5,7 @@
 
 The used environment of the \textit{CartPole} limits the steps to 200 for each episode. It might be interesting to perform the same experiments on the same environment with no step limits.
 
-We observed that several trained agents were able to successfully solving the task. Many of them get the maximum reward mostly pushing to one side the cart, unaware of the boundaries of the environment that are terminal states, that means less reward in the future. In a continuous environment this behaviour will leads to a bad episode encouraging the Q-learning to learn a smarter policy.
+\Auth~observed that several trained agents were able to successfully solving the task. Many of them get the maximum reward mostly pushing to one side the cart, unaware of the boundaries of the environment that are terminal states, that means less reward in the future. In a continuous environment this behaviour will leads to a bad episode encouraging the Q-learning to learn a smarter policy.
 
 \subsection{Reward function redesign}
 
@@ -13,4 +13,4 @@ Another interesting possible solution to limit the suicidal behaviour towards th
 
 \subsection{Longer Time Execution}
 
-Our tests is obviously limited. The cited references for DQN and Double DQN executed for a total of 200 Million of frames, that is 50 Million of steps, while the maximum reached by our tests was 896000. Increasing the number of episode and therefore the number of steps could show better the behaviour of the Q-value in \textit{CartPole} environment.
+\Authpp~tests is obviously limited. The cited references for DQN and Double DQN executed for a total of 200 Million of frames, that is 50 Million of steps, while the maximum reached by our tests was 896000. Increasing the number of episodes and therefore the number of steps could show better the behaviour of the Q-value in \textit{CartPole} environment.
