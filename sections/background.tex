@@ -57,8 +57,9 @@ In the \textit{Playing Atari with Deep Reinforcement Learning}~\cite{DBLP:journa
 	\label{fig:dqn-hyperparams}
 \end{table}
 
-DQN is a multi-layered Convolution Neural Network $Q(s, \cdotp; \theta)$ %(TODO: CITARE L'ARCHITETTURA???), % 
-where $\theta$ are the parameters, that approximates the action-value function $Q$. It takes a 84x84x4 of the last four gray-scale frames as input representing the state $s$, and it outputs one predicted $Q$-value for each valid action.  
+DQN is a multi-layered Convolution Neural Network $Q(s, \cdotp; \theta)$ where $\theta$ are the parameters, that approximates the action-value function $Q$. It takes a 84x84x4 of the last four gray-scale frames as input representing the state $s$, and it outputs one predicted $Q$-value for each valid action.  
+%L'ARCHITETTURA % 
+The first convolutional layer used 32 filters of size 8 and stride 4, the second layer has 64 filter of size 4 and stride 2, the final convolutional layer has 64 filters of size 3 and stride 1. Follow a fully-connected layer of 512 units. All layers are separated by Rectifier Linear Units (ReLU). Finally a fully connected linear layer outputs the Q-values vector of $|\mathcal{A}|$ dimension, the cardinality of the action space.
 
 As the Q-learning, DQN algorithm applies \textit{greedy} as target policy and \textit{$\epsilon$-greedy} as behaviour policy. Initially the parameter $\epsilon$ is set to 1 and it linearly decreases at each step to the minimum 0.1. The main hyperparameters are showed in Table~\ref{fig:dqn-hyperparams}.
 
@@ -82,7 +83,7 @@ Using \textit{experience replay} implies a greater data efficiency since each sa
 %(CUT)
 
 %(What do the authors want to do?)
-In the article \textit{Human-level control through deep reinforcement learning}~\cite{Mnih2015} the \textbf{DQN algorithm} is improved using a \textit{target network} in addition to \textit{experience replay}.
+In the article \textit{Human-level control through deep reinforcement learning}~\cite{Mnih2015} the \textbf{DQN algorithm} is improved using a \textit{target network} that reduces correlations with the target in addition to \textit{experience replay}.
 %(How does the algorithm work?) %
 The second version of DQN algorithm applies an \textit{$\epsilon$-greedy} policy with the network $Q(s, \cdotp; \theta)$ (\textit{online network}) and it applies the \textit{greedy} policy with the \emph{different} network $Q(s, \cdotp; \theta')$ (\textit{target network}). The parameters $\theta'$ are updated with a periodically copy of the $\theta$ parameters from the \textit{online network}. The target is now defined as:
 \begin{equation}
