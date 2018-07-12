@@ -66,7 +66,7 @@ Aware that more runs are required, especially in the reinforcement learning fiel
 
 \subsection{Evaluation Settings}
 
-An \textit{episode} is defined as the steps from initial state to terminal state. Every 100 episodes of an execution, the algorithm saved a model of the neural network, since an execution run for about 1 Milion steps, the resulting models for each configuration vary. Every model is evaluated in an agent without Q-learning for 100 episodes. During the evaluation \auth~measured the average reward in the 100 episodes.
+An \textit{episode} is defined as the steps from initial state to terminal state. Every 100 episodes of an execution, the algorithm saved a model of the neural network, since an execution run for about 1 Milion steps, the resulting models for each configuration vary. In order to compare the results \auth~considered the maximum number of models produced by all the runs. Every model is evaluated in an agent without Q-learning for 100 episodes. During the evaluation \auth~measured the average reward in the 100 episodes.
 
 \subsection{Technologies}
 The code\footnote{DQN-in-CartPole GitHub repository: \url{https://github.com/EduBic/DQN-in-CartPole}} is written in Python 3, with the use of NumPy and Keras library on top of Tensorflow.

@@ -3,13 +3,11 @@
 
 \subsection{Continuous time}
 
-The used environment of the \textit{CartPole} limits the steps to 200 for each episode. It might be interesting to perform the same experiments on the same environment with no step limits.
-
-\Auth~observed that several trained agents are able to successfully solving the task. Many of them get the maximum reward mostly pushing to one side the cart, unaware of the boundaries of the environment that are terminal states, that means less reward in the future. In a continuous environment this behaviour will leads to a bad episode encouraging the Q-learning to learn a smarter policy.
+The used environment of the \textit{CartPole} limits the steps to 200 for each episode. It might be interesting to perform the same experiments on the same environment with no step limits. In order to see if a continuous environment can encourage the Q-learning to learn smarter policies.
 
 \subsection{Reward function redesign}
 
-Another interesting possible solution to limit the suicidal behaviour towards the edges could be to redesign the reward function. A reward that decreases as much as the agent is far from the centre might encourage the agent to learn a policy in which it's better to stay in the middle.
+Another interesting test could be to redesign the reward function. A reward that decreases as much as the agent is far from the centre might encourage the agent to learn a policy in which it's better to stay in the middle.
 
 \subsection{Longer Time Execution}
 

@@ -7,7 +7,7 @@
 Figure~\ref{fig:q-values} shows the different performances from the 4 configurations. In order to reduce the noise of the Q-value estimates, as the cited papers did, during the training \auth~take the averages of the Q-values from \numepoch~steps, defined as \textit{epoch}. %More epochs computed by a configuration implies more steps per episode and then more reward in general. Hence the \textit{deep} configurations played better than the \textit{shallow}. More details in the evaluation subsection.
 
 An interesting viewpoint is the overestimation issue. If the reward is nonzero and $\gamma < 1$ as in the \textit{CartPole} environment the return $G_t$ is $\frac{1}{1 - \gamma}$ \cite{Sutton:1998:IRL:551283}. Hence in \authpp~case the return with $\gamma = 0.99$ is $100$ then the DQN has to converge to that value.
-Figure~\ref{fig:q-values} shows that the \textit{shallow} configurations converge to 100. Instead the \textit{deep} configurations after about 400 epochs started to oscillate and to overestimate the true return. \Auth~think the \textit{deep} configurations failed to generalize (overfitting).
+Figure~\ref{fig:q-values} shows that the \textit{shallow} configurations converge to 100. Instead the \textit{deep} configurations after about 400 epochs started to oscillate and to overestimate the true return. \Auth~think the \textit{deep} configurations failed to generalize and suffers of overfitting.
 
 In spite of the expectation the Double Q-learning did not reduce significantly the overestimation, the differences between the \textit{shallow} configurations are minimal. Both the \textit{deep} configurations suffer of overestimation, in particular in the last epochs.
 
@@ -42,6 +42,8 @@ The results of evaluation (Figure~\ref{fig:comparison}) of the model show that t
 
 In fact from the Table~\ref{tab:comparison_table} emerges that a different seed could imply a good or a bad learning process. The \textit{DQN shallow} configuration showed that for the best seed it needs 400 episodes in order to solve the problem while with the seed 52 it needs 1700 episodes. Probably this is caused by a great component of randomness in the DQN algorithm: the probability involves in \textit{$\epsilon$-greedy}, the random selection of mini-batches from the \textit{experience replay} dataset, the random initialization of the parameter of the Q-network and the randomness in the environment.
 
+Another interesting result is that the agent when learn to solve the problem, get 200 as reward, after some good episodes it returns to perform poorly. The Table~\ref{tab:comparison_table} shows that only about 1/4 of the 83 models solved the problem, this means that more episodes of training does not mean better agent performance.
+
 \begin{table}
 	\centering
 	\begin{tabular}{|c|c|c|c|}
@@ -49,7 +51,7 @@ In fact from the Table~\ref{tab:comparison_table} emerges that a different seed 
 		\textbf{Configuration} & \textbf{Seed} & \textbf{Good models} & \textbf{Solved (Ep.)} \\
 		\hline
 			 & 32 & 13 / 83 & 300 \\
-		DDQN shallow & 16 & 83 / 83 & 600 \\
+		DDQN shallow & 42 & 16 / 83 & 600 \\
 			 & 52 & 16 / 83 & 300 \\
 		\hline
 		 		& 32 & 21 / 83 & 400 \\
