@@ -20,7 +20,7 @@ An episode terminates when the pole angle is more than $\pm12$ or cart position 
 The reward is 1 for every step taken, including the termination step. Since the maximum number of step for episode is 200 the maximum reward for episode is 200.
 
 
-\subsection{Neural Network Architecture}
+\subsection{Neural Network Architectures}
 
 After some preliminary tests \auth~end up with two different architectures for the Deep Q Network: the most simple consists of an input layer of 4 units, the state features, a single fully connected hidden layer of 64 units (\textit{DQN Shallow}) with ReLU as activation function and two units, the possible actions, for the output layer. The second one is the previous network but with an additional hidden layer of 32 units with ReLU as activation function before the output layer (\textit{DQN deep}). %The third configuration keeps the input and output layers of the first one, between them there are three fully connected hidden layers of 32, 16 and 8 units respectively \textit{(DQN more deep)}. 
 These architectures were created for comparing the difference between deep and shallow neural networks.
@@ -69,7 +69,7 @@ Aware that more runs are required, especially in the reinforcement learning fiel
 An \textit{episode} is defined as the steps from initial state to terminal state. Every 100 episodes of an execution, the algorithm saved a model of the neural network, since an execution run for about 1 Milion steps, the resulting models for each configuration vary. In order to compare the results \auth~considered the maximum number of models produced by all the runs. Every model is evaluated in an agent without Q-learning for 100 episodes. During the evaluation \auth~measured the average reward in the 100 episodes.
 
 \subsection{Technologies}
-The code\footnote{DQN-in-CartPole GitHub repository: \url{https://github.com/EduBic/DQN-in-CartPole}} is written in Python 3, with the use of NumPy and Keras library on top of Tensorflow.
+The code\footnote{DQN-in-CartPole GitHub repository: \url{https://github.com/EduBic/DQN-in-CartPole}} is written in Python 3 with the use of NumPy and Keras library on top of Tensorflow.
 
 
 
