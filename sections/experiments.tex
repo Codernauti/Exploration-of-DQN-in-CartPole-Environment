@@ -4,7 +4,7 @@
 \Authpp~testbed is done in the \textit{CartPole-v0} environment available in the Gym toolkit \cite{Gym}.
 In this toy problem a pole is attached by an un-actuated joint to a cart, which moves along a frictionless track. The pendulum starts upright, and the goal is to prevent it from falling over by increasing and reducing the cart's velocity. It was invented for having pseudo-standard benchmark problem from the field of control theory and artificial neural networks for designing and testing controllers on complex and unstable non-linear system.
 
-From documentation the problem is defined as \textit{solved} if the agent get average reward of 195.0 over 100 consecutive trials. \Auth~used this as a parameter for evaluating our trained models.
+From documentation the problem is defined as \textit{solved} if the agent get average reward of 195.0 over 100 consecutive trials. \Auth~used this as a parameter for evaluating the trained models.
  
 \subsubsection{States space}
 A state of the agent is described through a vector of 4 features: the  \textit{Cart Position}, \textit{Cart Velocity}, \textit{Pole Angle} and \textit{Pole Velocity At Tip} (which can be interpreted on how fast the pole is falling) .
@@ -23,13 +23,13 @@ The reward is 1 for every step taken, including the termination step. Since the 
 \subsection{Neural Network Architecture}
 
 After some preliminary tests \auth~end up with two different architectures for the Deep Q Network: the most simple consists of an input layer of 4 units, the state features, a single fully connected hidden layer of 64 units (\textit{DQN Shallow}) with ReLU as activation function and two units, the possible actions, for the output layer. The second one is the previous network but with an additional hidden layer of 32 units with ReLU as activation function before the output layer (\textit{DQN deep}). %The third configuration keeps the input and output layers of the first one, between them there are three fully connected hidden layers of 32, 16 and 8 units respectively \textit{(DQN more deep)}. 
-These architecture were created for comparing the difference between deep and shallow neural networks.
+These architectures were created for comparing the difference between deep and shallow neural networks.
 
 \subsection{General Settings}
 
-For the settings of the DQN \auth~started from the hyper-parameters used by \citeauthor{Hasselt:2016:DRL:3016100.3016191} \shortcite{Hasselt:2016:DRL:3016100.3016191}. Since the smaller complexity of the \textit{CartPole} environment and our limited hardware resources, \auth~set the \textit{experience replay} dataset size to 10000 instead of 1 Million and \auth~updated the target network parameters every 1000 steps ($\tau = 1000$). As loss function \auth~used \textit{Mean Squared Error} minimized using the RMSprop optimizer with mini-batches of sizes 32.
+For the settings of the DQN \auth~started from the hyper-parameters used by \citeauthor{Hasselt:2016:DRL:3016100.3016191} \shortcite{Hasselt:2016:DRL:3016100.3016191}. Since the smaller complexity of the \textit{CartPole} environment and \authpp~limited hardware resources, \auth~set the \textit{experience replay} dataset size to 10000 instead of 1 Million and \auth~set the update of the target network parameters every 1000 steps ($\tau = 1000$). As loss function \auth~used \textit{Mean Squared Error} minimized using the RMSprop optimizer with mini-batches of sizes 32.
 
-Each agent runs the training for a total of 3600 episodes using \textit{$\epsilon$-greedy} with $\epsilon$ initialized to 1 decreasing linearly for 10.000 steps and then fixed at 0.01 for all the next steps.
+Each agent runs the training for a total of 1024000 steps using \textit{$\epsilon$-greedy} with $\epsilon$ initialized to 1 decreasing linearly for 10000 steps and then fixed at 0.01 for all the next steps.
 
 \Auth~trained different agents with the DQN algorithm \cite{Mnih2015} and the Double DQN algorithm \cite{Hasselt:2016:DRL:3016100.3016191}.
 
@@ -58,15 +58,15 @@ Each agent runs the training for a total of 3600 episodes using \textit{$\epsilo
 
 \subsection{Configurations}
 
-\Auth~built 4 configuration that are all the combinations of neural network architectures and DQN algorithms, they are: \textit{DQN shallow} (also referred to as DQN), \textit{DQN deep}, \textit{Double DQN shallow} (DDQN) and \textit{Double DQN deep}. Each of them has set the hyper-parameters shown in the Table~\ref{tab:my-hyperparams}.
+\Auth~built 4 configurations that are all the combinations of neural network architectures and DQN algorithms, they are: \textit{DQN shallow} (also referred to as DQN), \textit{DQN deep}, \textit{Double DQN shallow} (DDQN) and \textit{Double DQN deep}. Each of them has set the hyper-parameters shown in the Table~\ref{tab:my-hyperparams}.
 
-Aware that more runs are required, especially in the reinforcement learning field \cite{DBLP:journals/corr/abs-1709-06560}, \auth~tested the configurations with 3 different seeds (32, 42 and 52) for randomness involve in the algorithm, for a total of 12 runs.
+Aware that more runs are required, especially in the reinforcement learning field \cite{DBLP:journals/corr/abs-1709-06560}, \auth~tested the configurations with 3 different seeds (32, 42 and 52), for randomness involved in the algorithm, for a total of 12 runs.
 
 % Comparing seed and stochasticity
 
 \subsection{Evaluation Settings}
 
-Every 100 episodes of an execution the algorithm saved a model of the neural network, since an execution run for 3600 episodes, the outcomes obtained are 35 models for each configuration. Every model is evaluated in an agent without Q-learning for 100 episodes. During the evaluation \auth~measured the average reward in the 100 episodes.
+An \textit{episode} is defined as the steps from initial state to terminal state. Every 100 episodes of an execution, the algorithm saved a model of the neural network, since an execution run for about 1 Milion steps, the resulting models for each configuration vary. Every model is evaluated in an agent without Q-learning for 100 episodes. During the evaluation \auth~measured the average reward in the 100 episodes.
 
 \subsection{Technologies}
 The code\footnote{DQN-in-CartPole GitHub repository: \url{https://github.com/EduBic/DQN-in-CartPole}} is written in Python 3, with the use of NumPy and Keras library on top of Tensorflow.
