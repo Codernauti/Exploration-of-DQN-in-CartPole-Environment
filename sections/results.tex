@@ -48,25 +48,25 @@ Another interesting result is that the agent when learn to solve the problem, ge
 	\centering
 	\begin{tabular}{|c|c|c|c|}
 		\hline
-		\textbf{Configuration} & \textbf{Seed} & \textbf{Good models} & \textbf{Solved (Ep.)} \\
+		\textbf{Configuration} & \textbf{Seed} & \textbf{Good models (\%)} & \textbf{Solved (Ep.)} \\
 		\hline
-			 & 32 & 13 / 83 & 300 \\
-		DDQN shallow & 42 & 16 / 83 & 600 \\
-			 & 52 & 16 / 83 & 300 \\
+			 			& 32 & 20.00 & 300 \\
+		DDQN shallow 	& 42 & 23.00 & 600 \\
+			 			& 52 & 22.11 & 300 \\
 		\hline
-		 		& 32 & 21 / 83 & 400 \\
-		DDQN deep  & 42 & 20 / 83 & 200 \\
-				  & 52 & 17 / 83 & 200 \\
+		 			& 32 & 25.00 & 400 \\
+		DDQN deep  	& 42 & 23.81 & 200 \\
+				  	& 52 & 23.60 & 200 \\
 		\hline
-					& 32 & 26 / 83 & 400 \\
-		DQN	shallow & 42 & 18 / 83 & 1000 \\
-					& 52 & 16 / 83 & 1700 \\
+					& 32 & 31.87 & 400 \\
+		DQN	shallow & 42 & 22.11 & 1000 \\
+					& 52 & 17.70 & 1700 \\
 		\hline
-				 & 32 & 20 / 83 & 500 \\
-		DQN deep & 42 & 21 / 83 & 1000 \\
-				 & 52 & 25 / 83 & 400 \\
+				 & 32 & 23.53 & 500 \\
+		DQN deep & 42 & 25.27 & 1000 \\
+				 & 52 & 30.12 & 400 \\
 		\hline
 	\end{tabular}
-	\caption{Results from evaluation. For each configuration with a seed, a model every 100 episode was evaluated. Good models represent the number of models that solved the \textit{CartPole} problem. Solved column shows the number of episodes necessary for obtaining the first good model.}
+	\caption{Results from evaluation. For each configuration with a seed, a model every 100 episode was evaluated. Good models represent the percent of models that solved the \textit{CartPole} problem for all the models saved. Solved column shows the number of episodes necessary for obtaining the first good model.}
 	\label{tab:comparison_table}
 \end{table}
